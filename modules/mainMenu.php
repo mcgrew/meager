@@ -8,12 +8,9 @@
       <li>
         <a class="sublevel" href="FAQ.php">FAQ</a>
       </li>
-      <li>
-        <a class="sublevel" href="FAQ.php">FAQ</a>
-      </li>
     </ul>
   </li>
   <li>
-    <a class="toplevel" href="aboutus.html">About <?php echo $config_sitename; ?></a>
+    <a class="toplevel" href="aboutus.html">About <?php echo $config[ 'sitename' ]; ?></a>
   </li>
 </ul>

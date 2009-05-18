@@ -2,7 +2,6 @@
 
 Class Module
 {
-
 	private $options = array( );
 	private $file;
 	function __construct( $file, $options = array( ))
@@ -13,6 +12,7 @@ Class Module
 	function load( )
 	{
 		global $modules;
+		global $config;
 		$mod = $this;
 		include( $_SERVER[ 'DOCUMENT_ROOT' ].'modules/'.$this->file );
 	}
@@ -47,7 +47,6 @@ Class Module
 			return $this->options[ $name ];
 		return $default;
 	}
-
 }
 Class ModuleHandler
 {

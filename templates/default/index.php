@@ -1,23 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo LANGUAGE; ?>" xml:lang="<?php echo LANGUAGE; ?>">
 <head>
-	<title><?php echo @$config_title; ?></title>
+	<title><?php echo @$config[ 'title' ]; ?></title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8;" />
 
-        <link href="templates/<?php echo $config_template; ?>/css/layout.css" rel="stylesheet" type="text/css" media="screen" />
-        <link href="templates/<?php echo $config_template; ?>/css/content.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="templates/<?php echo $config[ 'template' ]; ?>/css/layout.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="templates/<?php echo $config[ 'template' ]; ?>/css/content.css" rel="stylesheet" type="text/css" media="screen" />
         <link href="css/base.css" rel="stylesheet" type="text/css" media="screen" />
 
 
         <!-- Include these files only in IE -->
         <!--[if IE]>
-        <link href="templates/<?php echo $config_template; ?>/css/ie.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="templates/<?php echo $config[ 'template' ]; ?>/css/ie.css" rel="stylesheet" type="text/css" media="screen" />
         <![endif]-->
 
         <!-- Include these files only in IE <= 6 -->
         <!--[if lte IE 6]>
-        <link href="templates/<?php echo $config_template; ?>/css/ie6.css" rel="stylesheet" type="text/css" media="screen" />
-        <script src="templates/<?php echo $config_template; ?>/js/ie6.js" type="text/javascript"></script>
+        <link href="templates/<?php echo $config[ 'template' ]; ?>/css/ie6.css" rel="stylesheet" type="text/css" media="screen" />
+        <script src="templates/<?php echo $config[ 'template' ]; ?>/js/ie6.js" type="text/javascript"></script>
         <![endif]-->
 
 <script type="text/javascript" src="js/mootools-core.js"></script>
@@ -35,7 +35,7 @@
 <div class="headerContent">
 <div id="logo_bg">
 <div id="backdrop"></div>
-<div id="logo" title="Return to <?php echo @$config_sitename; ?> Home" onclick="window.location='./'">
+<div id="logo" title="Return to <?php echo @$config[ 'sitename' ]; ?> Home" onclick="window.location='./'">
 </div><!-- logo -->
 </div><!-- logo_bg -->
 
@@ -83,7 +83,7 @@ if ( $modules->exists( 'footer' ) )
 </div><!-- mainBody -->
 
 <br/>
-<div class="designer">Copyright &copy; <?php echo date( "Y" ).' '.$config_site_owner ?> - All Rights Reserved</div>
+<div class="designer">Copyright &copy; <?php echo date( "Y" ).' '.$config[ 'site_owner' ] ?> - All Rights Reserved</div>
 </div>
 
 

@@ -9,7 +9,7 @@ include( 'modules.php' );
 
 $modules->register( 'main_content',  '../'.current_page( ));
 
-include ( 'templates/'.$config_template.'/index.php' );
+include ( 'templates/'.$config[ 'template'].'/index.php' );
 
 
 ?>
