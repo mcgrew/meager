@@ -1,0 +1,316 @@
+/** base.css
+ * Author: Thomas McGrew
+ */
+
+* {
+	font-family: Arial, 'Nimbus Sans L', Verdana, 'Bitstream Vera Sans', Helvetica, sans-serif !important;
+}
+
+html {
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	font-size: 12px;
+	margin: 0;
+	color: #211;
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+/* =============================================================================
+ * Begin basic link styles
+ * =============================================================================
+ */
+a { 
+	cursor: pointer;
+	text-decoration: none;
+	color: #36a;
+}
+a:hover, a:active {
+	text-decoration: underline;
+}
+/* This will give links a 'push-button' effect when you click them */
+a:active {
+	position: relative;
+	top: 1px;
+}
+
+/* =============================================================================
+ * End basic link styles
+ * =============================================================================
+ */
+ 
+/* The padding and margin settings on lists are different between browsers.
+ * Some use padding for list indention, some use margin. The specification 
+ * doesn't say which should be used, but this will make them the same.
+ */
+ul, ol {
+        list-style: none;
+        margin: 0 0 0 15px;
+        padding: 0;
+}
+
+/* By default no borders on images that are links */
+img{ border: none }
+
+/* =============================================================================
+ * Begin heading styles 
+ * =============================================================================
+ */
+h1, h2, h3, h4, h4, h5, h6 { 
+	text-align: left;
+	margin: 5px 0 10px 0;
+	font-weight: normal;
+}
+
+h1, .contentheading {
+	font-size: 2em;
+}
+
+h2 {
+	font-size: 1.8em;
+}
+
+h2.title {
+	font-size: 1.8em;
+	text-align:center;
+}
+
+h3 { 
+	font-size: 1.6em;
+}
+
+h4 {
+	font-size:  1.4em;
+}
+h5 {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+h6 {
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+/* =============================================================================
+ * End heading styles
+ * =============================================================================
+ */
+
+/* =============================================================================
+ * Begin notification box styles
+ *
+ * These boxes are for conveying consistent notifications to the users in an
+ * aesthetically pleasing manner.
+ * =============================================================================
+ */
+span.alert, span.info, span.download, span.note {
+	display: block;
+	padding: 10px 10px 10px 50px;
+	margin: 15px 0;
+}	
+
+span.alert {
+	color: #c00;
+	border-top: 3px solid #fe7b7a;
+	border-bottom: 3px solid #fe7b7a;
+	background: #fcc url(../../images/icons/status-alert.png) 
+		10px 50% no-repeat;
+}
+
+span.info {
+	color: #005;
+	border-top: 3px solid #629de3;
+	border-bottom: 3px solid #629de3;
+	background: #cddff6 url(../../images/icons/status-info.png) 
+		10px 50% no-repeat;
+}
+
+span.note {
+	color: #a78010;
+	border-top: 3px solid #fde179;
+	border-bottom: 3px solid #fde179;
+	background: #fff5cc url(../../images/icons/status-note.png) 
+		10px 50% no-repeat;
+}
+
+span.download {
+	color: #476610;
+	border-top: 3px solid #c2df88;
+	border-bottom: 3px solid #c2df88;
+	background: #e8f4d2 url(../../images/icons/status-download.png) 
+		10px 50% no-repeat;
+}
+/* =============================================================================
+ * End notification box styles
+ * =============================================================================
+ */
+
+
+blockquote {
+	background: #eee url(../../images/icons/blockquote.png) 0 0 no-repeat;
+	border: 1px dashed #888;
+	color: #666;
+	font-style: italic;
+	font-size: 120%;
+	line-height: 150%;
+	margin-left: 30px;
+	padding: 7px;
+	font-size: 1em;
+}
+
+/* =============================================================================
+ * Begin styles for changing font types & colors
+ * =============================================================================
+ */
+.monospace {
+	font-family: monospace;
+}
+.bold {
+	font-weight: bold;
+}
+.italic {
+	font-style: italic;
+}
+.light {
+	color: #bbb;
+}
+.highlight:hover {
+	background-color: #def;
+}
+.blue {
+	color: #36a;
+}
+/* =============================================================================
+ * End styles for changing font types & colors
+ * =============================================================================
+ */
+ 
+ /* =============================================================================
+ * Begin styles for tables
+ * =============================================================================
+ */
+td.sectiontableheader {
+	background:#5C82BF none repeat scroll 0% 0%;
+	color:#fff;
+	font-weight:bold;
+	padding:4px;
+}
+
+tr.sectiontableentry2 {
+	background-color:#efefef;
+	padding:4px;
+}
+
+tr.sectiontableentry1 {
+	background-color:#f8f8f8;
+	padding:4px;
+}
+
+td.createWikipage a {
+	color:#9F0C0C;
+	width:120px;
+}
+
+td.createWikipage input {
+	color:#9F0C0C;
+}
+
+td.editWikipage input {
+	color:#3366AA;
+}
+
+
+/* =============================================================================
+ * End styles for tables
+ * =============================================================================
+ */
+
+/* =============================================================================
+ * Begin button styles 
+ * =============================================================================
+ */
+input[type="button"],
+input[type="submit"],
+button {
+	font-size: 1em;
+	font-weight: bold;
+	background: #d08030 url( 'http://maxd.cs.purdue.edu/alpha/images/orangeGradient.jpg' ) center center; 
+	padding: 0 2px;
+	border: 2px #d08030 outset;
+	color: #fff;
+	margin: 0;
+}
+
+input[type="button"]:active,
+input[type="submit"]:active,
+button:active {
+	border-style: inset;
+}
+
+input[type="button"]:disabled,
+input[type="submit"]:disabled,
+button:disabled {
+	background: #888 url( '../../images/grayGradient.jpg' ) center center;
+	border-color: #aaa;
+	color: #999;
+}
+
+input[type="button"]:active:disabled,
+input[type="submit"]:active:disabled,
+button:active:disabled {
+	border-style: outset;
+}
+
+input[type="button"].basic,
+input[type="submit"].basic,
+button.basic {
+	font-size: 1em;
+	font-weight: normal;
+	background: #ddd;
+	padding: 0;
+	border: 1px solid #888;
+	color: black;
+}
+
+input[type="button"].basic:active,
+input[type="submit"].basic:active,
+button.basic:active {
+	background: #c8c8c8;
+	border-style: solid;
+}
+
+input[type="button"].basici:disabled,
+input[type="submit"].basic:disabled,
+button.basic:disabled {
+	color: #bbb;
+}
+
+input[type="button"].basic:active:disabled,
+input[type="submit"].basic:active:disabled,
+button.basic:disabled:active {
+	background: #ddd;
+}
+
+/* =============================================================================
+ * End button styles 
+ * =============================================================================
+ */
+
+/* Some styles for clearing items */
+.clear { clear: both; }
+.clearLeft { clear: left; }
+.clearRight { clear: right; }
+
+/* This will display links with a |>>| image before them */
+a.readon {
+	font-weight: bold;
+	padding-left: 20px;
+	background: url( "../../images/read_short.gif"  ) 
+		center left no-repeat;
+	display: inline-block;	
+}

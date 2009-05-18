@@ -1,0 +1,323 @@
+/** layout.css
+ *
+ * @author Thomas McGrew
+ * @date July 29,2008 
+ *
+ * This file should be used for more specific layout adjustments to the web site.
+ */
+ 
+body {
+	background: #eee url(../images/content/web_background.jpg) fixed repeat-x;
+}
+
+div.mainBody {
+	width: 95%;
+	margin: auto;
+	min-width: 973px;
+	
+}
+
+div.mainContent {
+	background-color: #fff;
+	border: 1px solid #ccc; 
+	padding: 0 1% 1% 1%;
+}
+
+ 
+/* =============================================================================
+ * Begin top navigation bar layout.
+ * =============================================================================
+ */
+/* The main menu container */
+div#navigation { 
+	background: #55f; 
+	height: 38px;
+	/* for some reason 'position: relative' is required to make the 
+	 * dropdown menus render over top of content (?) */
+	position: relative;
+	top: 78px;
+	color: #fff;
+	z-index: 2147483647;
+}
+
+
+/* The links in the navigation menu */
+div#navigation a {
+	color: #fff;
+	display: block;
+	text-decoration: none;
+}
+
+/* The main menu */
+ul#toplevel {
+	position: absolute;
+	left: 0;
+	height: 40px;
+	margin: 0;
+	font-size: 1.2em;
+}
+
+/* The main menu items */
+ul#toplevel > li {
+	display: block;
+	margin-top: 6px;
+	height: 25px;
+	width: 110px;
+	float: left;
+	font-weight: bold;
+	line-height: 25px;
+	border-right: 1px solid #ccc;
+	text-align: center;
+
+}
+
+ul#toplevel > li:last-child {
+	border: none;
+}
+
+/* The dropdown menus */
+ul#toplevel > li ul {
+	display: none;
+	background-color: #55f;
+	width: 210px;
+	position: relative;
+	padding: 0 10px;
+	top: 0;
+	left: 0;
+	margin: 0;
+}
+
+/* The dropdown menu items */
+ul#toplevel > li > ul li {
+	text-align: left;
+	padding-left: 5px;
+	padding-top: 2px;
+	height: 25px;
+	background: #55f; 
+	border-bottom: 1px solid #fff;
+}
+
+ul#toplevel > li > ul li:last-child {
+	border: none;
+}
+
+ul#toplevel > li > ul li a {
+	white-space: pre;
+}
+
+ul#toplevel > li > ul li:hover {
+	background-color: #88f; 
+
+}
+
+/* 2nd level dropdowns and beyond */
+ul#toplevel > li > ul > li ul {
+	left: 225px;
+	top: -25px;
+	border-left: 1px solid white;
+}
+
+/* code to make the dropdowns display */
+ul#toplevel li:hover > ul {
+	display: block;
+}
+/* =============================================================================
+ * End top navigation bar layout
+ * =============================================================================
+ */
+
+/* =============================================================================
+ * Begin header layout
+ * =============================================================================
+ */
+ 
+/* The entire header box */ 
+.headerContent {
+	background: #aaf;
+	position: relative;
+	height: 115px;
+	margin: 1px -10px 0 -10px;
+	/* The following is necessary to make the menu dropdowns display
+	 * correctly in IE */
+	z-index: 2048;
+}
+
+/* The search box in the upper right corner */
+.headerModule {
+	height: 25px;
+	width: 394px;
+	position: absolute;
+	top: 5px;
+	right: 101px;
+	background: url( "../images/50percentWhite.png" ) 0 0 repeat;
+	padding: 2px 10px 10px 10px;
+	border: 1px solid #fff;
+}
+
+.headerModule #headerbg {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #fff;
+	opacity: 0.5;
+	-ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+	z-index: -1;
+}
+
+/* The text box for the search */
+.headerModule .search_box_text {
+	width: 262px;
+	margin-top: 1px;
+	border: none;
+}
+
+.headerModule .search_box {
+	padding-top: 5px;
+	padding-left: 20px;
+}
+
+/* The "Registered Users" text container */
+.toolbarModule {
+	position: absolute;
+	top: 50px;
+	right: 101px;
+	width: 334px;
+}
+
+/* Show the two parts of the message on separate lines */
+.toolbarModule span {
+	display: block;
+	text-align: center;
+}
+
+
+/* Top layer of the logo */
+#logo {
+	background: url( "../images/logos/logo.png" ) no-repeat;
+	position: absolute;
+	left: 33px;
+	top: 10px;
+	width: 225px;
+	height: 95px;
+	cursor: pointer;
+	z-index: 9;
+}
+
+/* "Alpha Testing Site" text */
+#logo #testingText {
+	text-transform: uppercase;
+	position: absolute;
+	top: 0;
+	left: 5px;
+	font-weight: bold;
+	color: #f00;
+}
+
+/* The version text for the logo */
+#logo #version {
+	display: block;
+	margin-top: 55px;
+	margin-left: 130px;
+	font-weight: 900;
+	color: #fff;
+}
+
+
+/* Bottom layer of the logo */
+#logo_bg {
+	height: 115px;
+	width: 948px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url( "../images/header/banner_background.jpg" ) 
+		0 0 no-repeat;
+}
+ 
+/* The container for the links at the top */ 
+div#outerMenu {
+	height: 30px;
+}
+
+/* The list for the links at the top */
+ul#mainlevelOuterMenu {
+	float: right;
+}
+
+/* The list items at the top */
+ul#mainlevelOuterMenu li {
+	height: 30px;
+	padding: 0 5px;
+	display: block;
+	vertical-align: 100%;
+	float: left;
+	font-weight: bold;
+}
+
+ul#mainlevelOuterMenu li:first-child {
+/*	padding-top: 13px; */
+}
+
+ul#mainlevelOuterMenu li img {
+	vertical-align: text-bottom;
+}
+ul#mainlevelOuterMenu li a {
+	color: #009900;
+	line-height: 30px;
+}
+
+/* =============================================================================
+ * End header layout
+ * =============================================================================
+ */
+
+/* =============================================================================
+ * Begin footer layout 
+ * =============================================================================
+ */
+/* The links at the bottom of the page */
+#footer {
+	background-color: #e8e8e8;
+	border: 1px solid #ccc;
+	margin: auto;
+	text-align: center;
+}
+
+/* The copyright text at the bottom */
+div.designer {
+	text-align: center;
+}
+
+
+/* =============================================================================
+ * Begin Sidebars
+ * =============================================================================
+ */
+
+/* The right side sidebar */
+#sidebarRight { 
+	float: right; 
+	width: 20%;
+}
+
+/* The left side sidebar */
+#sidebarLeft {
+	float: left;
+	width: 20%;
+}
+
+
+/* =============================================================================
+ * End Sidebars
+ * =============================================================================
+ */
+
+
+/* everything below here is debug code */
+
+#user7 .fc {
+	padding-bottom: 10px;
+}

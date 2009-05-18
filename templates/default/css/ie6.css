@@ -1,0 +1,198 @@
+/** ie6.css
+ * Author: Thomas McGrew
+ */
+
+/** This file is for fixing css code that doesn't work correctly in
+ * Internet Explorer 6. THIS IS FOR IE6 ONLY, and does not get loaded
+ * into any other browser, so regression testing is not necessary in 
+ * other browsers.
+ */
+
+
+ /** The child selector '>' isn't recognized by IE6, so all of the code
+  * which contains this selector must be redone here without it. 
+  * Unfortunately we can't always omit the child selector in regular code,
+  * because other browsers will select all descendant elements, not just
+  * immediate children. IE6 seems to have this behavior as well, but I find
+  * it cleaner to have only IE6 deal with this problem.
+  */
+
+/* =============================================================================
+ * Begin fixes from layout.css
+ * =============================================================================
+ */
+/* =============================================================================
+ * Begin top navigation bar code.
+ * =============================================================================
+ */
+ 
+/* The main menu */
+ul#mainlevel-top li {
+	display: block;
+	margin-top: 6px;
+	height: 25px;
+	line-height: 25px;
+	width: 110px;
+	float: left;
+	font-weight: bold;
+	border-right: 1px solid #ccc;
+	text-align: center;
+	/* this will fix the positioning of absolutely positioned elements
+	 * inside (i.e. the drop down menu) */
+	position: relative; 
+
+}
+
+/* The dropdown menus */
+ul#mainlevel-top li ul {
+	background-color: #5d83c0;
+	/* These next three lines will position the drop down properly in IE */
+	position: absolute;
+	width: 180px;
+	top: 25px;
+	left: -15px;
+}
+
+/* The dropdown menu items */
+ul#mainlevel-top li ul li {
+	white-space: pre;
+	margin: 0;
+	padding: 0 0 0 5px;
+	height: 25px;
+	width: 230px;
+	text-align: left;
+	background: url( "../images/header/navigation_background.png" ) 
+		0 -6px repeat-x #5172a6; 
+}
+
+/* 2nd level dropdowns and beyond */
+ul#mainlevel-top li ul li ul {
+	left: 220px;
+	top: 0;
+	border-left: 1px solid white;
+}
+ul#mainlevel-top li ul li.hover {
+	background-color: #5d83c0; 
+}
+
+/** Another unfortunate IE6 bug involved the :hover pseudoclass
+ * IE6 only recognizes this pseudoclass on <a> elements and therefore
+ * dynamic elements that change on a mouseover much more difficult.
+ * I've changed the pseudoclass to a regular class, and there is 
+ * fancy javascript code in ../js/ie6.js that will change the classes
+ * dynamically. Placing the code in these locations allows them to ony
+ * be loaded in IE6, and thus not burdening other browsers with unnecessary
+ * madness. Also, due to the child selector not being supported, this code
+ * looks maddening.
+ */
+/* code to make the dropdowns display */
+
+ul#mainlevel-top li ul,
+ul#mainlevel-top li.hover ul ul,
+ul#mainlevel-top li ul li.hover ul ul,
+ul#mainlevel-top li ul li.hover ul li.hover ul ul,
+ul#mainlevel-top li ul li.hover ul li.hover ul li.hover ul ul,
+ul#mainlevel-top li ul li.hover ul li.hover ul li.hover ul li.hover ul ul {
+	display: none;
+}
+
+ul#mainlevel-top li.hover ul, 
+ul#mainlevel-top ul li.hover ul, 
+ul#mainlevel-top ul li.hover ul li.hover ul, 
+ul#mainlevel-top ul li.hover ul li.hover ul li.hover ul, 
+ul#mainlevel-top ul li.hover ul li.hover ul li.hover ul li.hover ul, 
+ul#mainlevel-top ul li.hover ul li.hover ul li.hover ul li.hover ul li.hover ul, 
+ul#mainlevel-top ul li.hover ul li.hover ul li.hover ul li.hover ul li.hover ul li.hover ul {
+	display: block;
+}
+/* =============================================================================
+ * End top navigation bar code
+ * =============================================================================
+ */
+
+
+.toolbarModule {
+	z-index: 3
+}
+
+
+/* =============================================================================
+ * End child selector fixes
+ * =============================================================================
+ */
+
+/* IE6 doesn't properly support png transparency, so we have to fix it here */
+/* Top layer of the EcoliHub logo */
+#logo {
+	background-image: url( "../images/logos/logo.gif" );
+}
+
+/* Bottom layer of the EcoliHub logo */
+#logo_bg {
+}
+
+/* The entire header box */ 
+.headerContent {
+}
+
+/* The search box in the upper right corner */
+.headerModule{
+	background-image: url( "../images/50percentWhite.gif" );
+}
+
+/* The main menu container */
+div#topnavigation { 
+	/* replace the png with a similar gif */
+	background: url( "../images/header/navigation_background.gif" ) 
+}
+
+.headerContent #cornerFlip {
+	background-image: url( "../images/header/CornerFlip.gif" );
+}
+
+/* =============================================================================
+ * End fixes from layout.css
+ * =============================================================================
+ */
+
+/* =============================================================================
+ * Begin fixes from content.css
+ * =============================================================================
+ */
+
+/* ====================== Events Page ============================= */
+
+/* The year heading on the table */
+table.ev_table td.cal_td_daysnames {
+	/* correct for incorrect height calculation when element has padding */
+	height: 23px;
+}
+
+/* The shaded boxes on the bottom of the 'featured links' box
+ * This will correct the display of this box (or at least close enough)
+ */
+.bottom {
+	bottom: 0;
+	left: 0;
+	width: 98%;
+}
+
+
+/* =============================================================================
+ * End fixes from content.css
+ * =============================================================================
+ */
+
+/* This will fix the alignment of the boxes on the front page. IE6 refuses to
+ * allow the clearing divs to have a height of 0, so we'll take advantage of
+ * it's quirky behaviour to size the top and bottom containers. Essentially 
+ * the div's aren't necessary to make topContainer and bottomContainer be the 
+ * right size in IE6, so we'll just remove them.
+ */
+.fpAligner {
+	 display: none;
+}
+
+
+/* Debug code goes here */
+

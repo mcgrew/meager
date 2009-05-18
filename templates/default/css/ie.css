@@ -1,0 +1,14 @@
+/** This file should only be included inside an [if IE] statement.
+ * It is intended to fix incompatibility issues with IE.
+ */
+
+
+#registrationTable,
+#cbIconsTop {
+	margin-left: -15%;
+}
+
+#registration_process {
+	position: relative;
+	left: -50px;
+}
