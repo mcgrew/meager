@@ -66,12 +66,12 @@ ul#toplevel > li {
 	float: left;
 	font-weight: bold;
 	line-height: 25px;
-	border-right: 1px solid #ccc;
+	border-left: 1px solid #ccc;
 	text-align: center;
 
 }
 
-ul#toplevel > li:last-child {
+ul#toplevel > li:first-child {
 	border: none;
 }
 
@@ -94,10 +94,10 @@ ul#toplevel > li > ul li {
 	padding-top: 2px;
 	height: 25px;
 	background: #55f; 
-	border-bottom: 1px solid #fff;
+	border-top: 1px solid #fff;
 }
 
-ul#toplevel > li > ul li:last-child {
+ul#toplevel > li > ul li:first-child {
 	border: none;
 }
 
