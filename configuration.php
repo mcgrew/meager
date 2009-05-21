@@ -8,6 +8,10 @@ $config = array(
 	'site_owner' => 'Site Owner'
 );
 
+$index_files = array( 
+	"index.php",
+	"index.html"
+);
 
 
 ?>

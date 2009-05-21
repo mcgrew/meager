@@ -140,16 +140,24 @@ $modules = new ModuleHandler( );
 function current_page( )
 {
 	$current_page = @$_REQUEST[ 'page' ];
-	if ( !file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$current_page ))
+	if ( !file_exists( $current_page ))
 	{
 		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$current_page.".php" )) $current_page .= '.php';
 		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$current_page.".html" )) $current_page .= '.html';
 	}
-	if ( !$current_page or !file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$current_page )) 
-	{
-		$current_page = 'index.php';
-	}
+	else if ( is_dir( $_SERVER[ 'DOCUMENT_ROOT' ].$current_page ))
+		$current_page = find_index_for_dir( $current_page );
 	return $current_page;
+}
+
+function find_index_for_dir( $dir )
+{
+	foreach ( $config_index_files as $file )
+	{
+		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$dir.'/'.$file ) && !is_dir( $_SERVER[ 'DOCUMENT_ROOT' ].$dir.'/'.$file ))
+			return $dir.'/'.$file;
+	}
+	return false;
 }
 
 ?>
