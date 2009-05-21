@@ -1,15 +1,5 @@
-<?
 
-
-if ( !defined( '_VALID_' )) define( '_VALID_', true );
-
-include( 'configuration.php' );
-include( 'globals.php' );
-include( 'modules.php' );
-
-$modules->register( 'main_content',  '../'.current_page( ));
-
-include ( 'templates/'.$config[ 'template'].'/index.php' );
-
-
-?>
+<br />
+<div style="" id="topContainer">
+This is the home page. This is just a test again.
+</div>
