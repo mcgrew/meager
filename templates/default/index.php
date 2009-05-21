@@ -1,7 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo LANGUAGE; ?>" xml:lang="<?php echo LANGUAGE; ?>">
 <head>
-	<title><?php echo @$config[ 'title' ]; ?></title>
+		<base href="http://<?php echo $_SERVER[ "HTTP_HOST" ]; ?>/" />
+	<title><?php @$config[ 'title' ]; ?></title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8;" />
 
         <link href="templates/<?php echo $config[ 'template' ]; ?>/css/layout.css" rel="stylesheet" type="text/css" media="screen" />
@@ -61,12 +62,12 @@
 
 <div class="clear"></div>
 <!-- add which page this is for easier selection ? -->
-<div id="content_">
+<div id="content">
 
 <?php
 
 //include( get_page( ) );
-$modules->load( 'main_content' );
+$modules->load( 'content' );
 
 ?>
 <div class="clear" style="height: 0;"></div>

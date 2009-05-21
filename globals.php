@@ -47,6 +47,10 @@ Class Module
 			return $this->options[ $name ];
 		return $default;
 	}
+	function get_filename( )
+	{
+		return $this->file;
+	}
 }
 Class ModuleHandler
 {
@@ -111,13 +115,23 @@ Class ModuleHandler
 		return false;
 	}
 
-	function get_opt( $name )
+	function get_opt( $name, $opt_name )
 	{
 		if ( $this->exists( $name ))
 		{
-			return $this->get( $name )->get_opt( $name );
+			return $this->get( $name )->get_opt( $opt_name );
 			return false;
 		}
+	}
+
+	function get_filename( $name )
+	{
+		if ( $this->exists( $name ))
+		{
+			return $this->get( $name )->get_filename( );
+			return false;
+		}
+
 	}
 }
 
@@ -132,7 +146,9 @@ function current_page( )
 		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$current_page.".html" )) $current_page .= '.html';
 	}
 	if ( !$current_page or !file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$current_page )) 
-		$current_page = 'home.php';
+	{
+		$current_page = 'index.php';
+	}
 	return $current_page;
 }
 
