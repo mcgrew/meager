@@ -149,6 +149,7 @@ function current_page( )
 		$current_page = find_index_for_dir( $current_page );
 	return $current_page;
 }
+$current_page = current_page( );
 
 function find_index_for_dir( $dir )
 {
@@ -160,4 +161,13 @@ function find_index_for_dir( $dir )
 	return false;
 }
 
+function get_template( )
+{
+	global $special_templates;
+	global $config;
+	foreach( $special_templates as $template => $active )
+		if ( $active )
+			return $template;
+	return $config[ 'template' ];
+}
 ?>
