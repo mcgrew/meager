@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo LANGUAGE; ?>" xml:lang="<?php echo LANGUAGE; ?>">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $config['language']; ?>" xml:lang="<?php echo $config['language']; ?>">
 <head>
 		<base href="http://<?php echo $_SERVER[ "HTTP_HOST" ]; ?>/" />
 	<title><?php echo $modules->get_filename( 'content' ).' - '.@$config[ 'title' ]; ?></title>
