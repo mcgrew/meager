@@ -165,6 +165,8 @@ function get_template( )
 {
 	global $special_templates;
 	global $config;
+	if ( isset( $_REQUEST[ 'template' ] ) and is_dir( 'templates/'.($template = str_replace( '/', '', $_REQUEST[ 'template' ]))))
+		return $template;
 	foreach( $special_templates as $template => $active )
 		if ( $active )
 			return $template;
