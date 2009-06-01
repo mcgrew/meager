@@ -30,6 +30,9 @@ $modules->register( 'search', 'search.php', array(
 ));
 
 
+$modules->register( 'analytics', 'analytics.php', array(
+			'tracker' => false 
+));
 
 
 
