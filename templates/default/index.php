@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $config['language']; ?>" xml:lang="<?php echo $config['language']; ?>">
 <head>
 		<base href="http://<?php echo $_SERVER[ "HTTP_HOST" ]; ?>/" />
-	<title><?php echo $modules->get_filename( 'content' ).' - '.@$config[ 'title' ]; ?></title>
+	<title><?php echo str_replace( '../', '',  $modules->get_filename( 'content' ) ).' - '.@$config[ 'title' ]; ?></title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8;" />
 
         <link href="templates/<?php echo $config[ 'template' ]; ?>/css/layout.css" rel="stylesheet" type="text/css" media="screen" />
