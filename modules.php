@@ -4,7 +4,6 @@
 // The format is $modules->register( 'name', 'path', 'options' );.
 // Path  is relative to the '/modules/' directory.
 
-// Modules for errors and redirects.
 $modules->register( 'STATUS_301', 'STATUS/301.php' );
 $modules->register( 'STATUS_302', 'STATUS/302.php' );
 $modules->register( 'STATUS_307', 'STATUS/307.php' );
@@ -31,6 +30,9 @@ $modules->register( 'search', 'search.php', array(
 ));
 
 
+$modules->register( 'analytics', 'analytics.php', array(
+			'tracker' => false 
+));
 
 
 
