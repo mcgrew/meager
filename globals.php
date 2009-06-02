@@ -90,7 +90,7 @@ Class Module
 	*/
 	function set_opt( $name, $value )
 	{
-		$this->setOpts( array( $name => $value ));
+		$this->set_opts( array( $name => $value ));
 	}
 
 	/*

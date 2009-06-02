@@ -7,7 +7,11 @@ $config = array(
 	'sitename' => 'Web Site',
 	'title' => 'Default Web Site',
 	'site_owner' => 'Site Owner'
+	'cache_dir' => '/tmp/meager/cache/'
 );
+
+if ( !file_exists( $config[ 'cache_dir' ]))
+	mkdir( $config[ 'cache_dir' ], 0777, true );
 
 // This array should contain a list of valid index files for a directory.
 $config_index_files = array( 
