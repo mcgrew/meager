@@ -18,9 +18,16 @@ $modules->register( 'STATUS_501', 'STATUS/501.php' );
 
 
 
-$modules->register( 'main menu', 'mainMenu.php' );
-
-$modules->register( 'outer menu', 'outerMenu.php' );
+$modules->register( 'main menu', 'menu.php', array(
+	'id' => 'navigation',
+	'menu' => array( 
+		"Home" => "/",
+		"Help" => array(
+			"FAQ" => "FAQ.php"
+		),
+		"About".$config[ 'sitename' ] => "aboutus.html"
+	),
+));
 
 $modules->register( 'search', 'search.php', array( 
 			'moduleclass_sfx' => null,

@@ -49,7 +49,7 @@ div#navigation a {
 }
 
 /* The main menu */
-ul#toplevel {
+div#navigation > ul {
 	position: absolute;
 	left: 0;
 	height: 40px;
@@ -58,7 +58,7 @@ ul#toplevel {
 }
 
 /* The main menu items */
-ul#toplevel > li {
+div#navigation > ul > li {
 	display: block;
 	margin-top: 6px;
 	height: 25px;
@@ -71,12 +71,12 @@ ul#toplevel > li {
 
 }
 
-ul#toplevel > li:first-child {
+div#navigation > ul > li:first-child {
 	border: none;
 }
 
 /* The dropdown menus */
-ul#toplevel > li ul {
+div#navigation > ul > li ul {
 	display: none;
 	background-color: #55f;
 	width: 210px;
@@ -88,7 +88,7 @@ ul#toplevel > li ul {
 }
 
 /* The dropdown menu items */
-ul#toplevel > li > ul li {
+div#navigation > ul > li > ul li {
 	text-align: left;
 	padding-left: 5px;
 	padding-top: 2px;
@@ -97,28 +97,28 @@ ul#toplevel > li > ul li {
 	border-top: 1px solid #fff;
 }
 
-ul#toplevel > li > ul li:first-child {
+div#navigation > ul > li > ul li:first-child {
 	border: none;
 }
 
-ul#toplevel > li > ul li a {
+div#navigation > ul > li > ul li a {
 	white-space: pre;
 }
 
-ul#toplevel > li > ul li:hover {
+div#navigation > ul > li > ul li:hover {
 	background-color: #88f; 
 
 }
 
 /* 2nd level dropdowns and beyond */
-ul#toplevel > li > ul > li ul {
+div#navigation > ul > li > ul > li ul {
 	left: 225px;
 	top: -25px;
 	border-left: 1px solid white;
 }
 
 /* code to make the dropdowns display */
-ul#toplevel li:hover > ul {
+div#navigation > ul li:hover > ul {
 	display: block;
 }
 /* =============================================================================
