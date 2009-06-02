@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:dc="http://purl.org/dc/elements/1.1/" version="1.0">
 	<xsl:param name="count" select="0"/>
+	<xsl:param name="title" select="atom:feed/atom:title"/>
 	<xsl:output method="html"/>
 	<xsl:template match="/">
 		<div class="atom">
@@ -25,7 +26,7 @@
 	</xsl:template>
 	<xsl:template match="/atom:feed">
 		<h3>
-			<xsl:value-of select="atom:title"/>
+			<xsl:value-of select="$title"/>
 		</h3>
 		<xsl:if test="atom:tagline">
 			<p>
