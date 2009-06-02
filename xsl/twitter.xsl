@@ -10,7 +10,7 @@
 		<div class="twitter">
 			<h3>
 				<a href="{link}" target="_blank">
-					<xsl:value-of select="title"/>
+					<xsl:value-of select="$title"/>
 				</a>
 			</h3>
 			<ul>
