@@ -1,5 +1,6 @@
 <?php
 
+// This array should contain various configurations for your web site.
 $config = array( 
 	'language' => 'en',
 	'template' => 'default',
@@ -8,6 +9,7 @@ $config = array(
 	'site_owner' => 'Site Owner'
 );
 
+// This array should contain a list of valid index files for a directory.
 $config_index_files = array( 
 	"index.php",
 	"index.html"
