@@ -9,7 +9,7 @@
 	<xsl:template match="/rss/channel">
 		<div class="rss">
 			<h3>
-				<xsl:value-of select="$title"/>
+				<a href="{link}"><xsl:value-of select="$title"/></a>
 			</h3>
 			<p>
 				<xsl:value-of select="description"/>
