@@ -22,9 +22,7 @@
 	<xsl:template match="/rss/channel/item">
 		<xsl:if test="position() &lt;= $count or $count &lt; 1">
 			<li>
-				<p>
 					<xsl:value-of select="description" disable-output-escaping="yes"/>
-				</p>
 			</li>
 		</xsl:if>
 	</xsl:template>

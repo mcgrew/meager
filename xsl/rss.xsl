@@ -25,9 +25,7 @@
 				<a href="{link}" title="{substring(pubDate, 0, 11)}">
 					<xsl:value-of select="title"/>
 				</a>
-				<p>
 					<xsl:value-of select="description" disable-output-escaping="yes"/>
-				</p>
 			</li>
 		</xsl:if>
 	</xsl:template>

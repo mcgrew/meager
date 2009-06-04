@@ -24,7 +24,6 @@ echo "
 <form name='BannerSearchBoxForm' id='search_box_form' method='get' action='http://www.google.com/search' onsubmit='this.q.value = \"site:".$_SERVER['SERVER_NAME']." \"+this.q.value;'>
         <input class='search_box_text' name='q' value='$defaultValue' id='headerSearchInput' onfocus='$focusAction' type='text' style='height:18px;' />
         <input type='submit' value='SEARCH' alt='Submit' id='headerSearchButton' style='vertical-align:top;' />
-        </a>
 </form>
 
 </div>"
