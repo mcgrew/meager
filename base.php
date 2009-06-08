@@ -13,6 +13,6 @@ if ( !file_exists( $current_page ))
 
 ob_start( );
 include ( 'templates/'.get_template( ).'/index.php' );
-ob_flush( );
+ob_end_flush( );
 
 ?>
