@@ -118,7 +118,7 @@ span.alert {
 	color: #c00;
 	border-top: 3px solid #fe7b7a;
 	border-bottom: 3px solid #fe7b7a;
-	background: #fcc url(../../images/icons/status-alert.png) 
+	background: #fcc url(../images/icons/status-alert.png) 
 		10px 50% no-repeat;
 }
 
@@ -126,7 +126,7 @@ span.info {
 	color: #005;
 	border-top: 3px solid #629de3;
 	border-bottom: 3px solid #629de3;
-	background: #cddff6 url(../../images/icons/status-info.png) 
+	background: #cddff6 url(../images/icons/status-info.png) 
 		10px 50% no-repeat;
 }
 
@@ -134,7 +134,7 @@ span.note {
 	color: #a78010;
 	border-top: 3px solid #fde179;
 	border-bottom: 3px solid #fde179;
-	background: #fff5cc url(../../images/icons/status-note.png) 
+	background: #fff5cc url(../images/icons/status-note.png) 
 		10px 50% no-repeat;
 }
 
@@ -142,7 +142,7 @@ span.download {
 	color: #476610;
 	border-top: 3px solid #c2df88;
 	border-bottom: 3px solid #c2df88;
-	background: #e8f4d2 url(../../images/icons/status-download.png) 
+	background: #e8f4d2 url(../images/icons/status-download.png) 
 		10px 50% no-repeat;
 }
 /* =============================================================================
@@ -239,7 +239,7 @@ input[type="submit"],
 button {
 	font-size: 1em;
 	font-weight: bold;
-	background: #d08030 url( 'http://maxd.cs.purdue.edu/alpha/images/orangeGradient.jpg' ) center center; 
+	background: #d08030;
 	padding: 0 2px;
 	border: 2px #d08030 outset;
 	color: #fff;
@@ -255,7 +255,7 @@ button:active {
 input[type="button"]:disabled,
 input[type="submit"]:disabled,
 button:disabled {
-	background: #888 url( '../../images/grayGradient.jpg' ) center center;
+	background: #888;
 	border-color: #aaa;
 	color: #999;
 }
@@ -306,11 +306,3 @@ button.basic:disabled:active {
 .clearLeft { clear: left; }
 .clearRight { clear: right; }
 
-/* This will display links with a |>>| image before them */
-a.readon {
-	font-weight: bold;
-	padding-left: 20px;
-	background: url( "../../images/read_short.gif"  ) 
-		center left no-repeat;
-	display: inline-block;	
-}

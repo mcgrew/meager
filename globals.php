@@ -40,7 +40,7 @@ Class Module
 		global $modules;
 		global $config;
 		$mod = $this;
-		include( $_SERVER[ 'DOCUMENT_ROOT' ].'modules/'.$this->file );
+		include( $_SERVER[ 'DOCUMENT_ROOT' ].'/modules/'.$this->file );
 	}
 
 	/*

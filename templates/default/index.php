@@ -22,6 +22,9 @@
 	<![endif]-->
 
 	<script type="text/javascript" src="js/mootools-core.js"></script>
+	<script type="text/javascript" src="js/mootools-more.js"></script>
+	<script type="text/javascript" src="js/mooplus.js"></script>
+	<script type="text/javascript" src="configuration.js"></script>
 </head>
 <body>
 
@@ -73,10 +76,6 @@
 	</div><!-- mainBody -->
 
 
-	<script type="text/javascript" src="js/mootools-more.js"></script>
-	<script type="text/javascript" src="js/mootools-extras.js"></script>
-	<script type="text/javascript" src="configuration.js"></script>
-	<script type="text/javascript" src="js/ecoliwebsearch.js"></script>
 	<?php $modules->load( 'analytics' ); ?>
 </body>
 </html>

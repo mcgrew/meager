@@ -1,11 +1,20 @@
-<?
+<?php
 
 
 if ( !defined( '_VALID_' )) define( '_VALID_', true );
 
 include( 'globals.php' );
-include( 'configuration.php' );
-include( 'modules.php' );
+include( 'config/configuration.php' );
+include( 'config/modules.php' );
+
+// Register any modules/options contained in these variables.
+if ( isset( $module_list ))
+	foreach( $module_list as $name => $file )
+		$modules->register( $name, $file );
+		
+if ( isset( $module_options ))
+	foreach( $module_options as $name => $opts )
+			$modules->set_opts( $name, $opts );
 
 $modules->register( 'content',  "../$current_page" );
 if ( !file_exists( $current_page ))
