@@ -25,7 +25,7 @@ $modules->register( 'main menu', 'menu.php', array(
 		"Help" => array(
 			"FAQ" => "FAQ.php"
 		),
-		"About".$config[ 'sitename' ] => "aboutus.html"
+		"About ".$config[ 'sitename' ] => "about.php"
 	),
 ));
 

@@ -4,9 +4,9 @@
 $config = array( 
 	'language' => 'en',
 	'template' => 'default',
-	'sitename' => 'Web Site',
+	'sitename' => 'Meager',
 	'title' => 'Default Web Site',
-	'site_owner' => 'Site Owner'
+	'site_owner' => 'Site Owner',
 	'cache_dir' => '/tmp/meager/cache/'
 );
 
