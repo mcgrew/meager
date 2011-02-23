@@ -20,18 +20,15 @@ xml/xsl path names should be relative to the web root.
 if ( !file_exists( $config[ 'cache_dir' ].'/xslt/' ))
 	mkdir( $config[ 'cache_dir' ].'/xslt/', 0777, true );
 
-if (preg_match( "/^http:\/\//",  $this->get_opt( 'xml' )))
-{
+if (preg_match( "/^http:\/\//",  $this->get_opt( 'xml' ))) {
 	$cache_time = $this->get_opt( "cache_time", "1 day" );
 	
 	$cacheFileName = $config[ 'cache_dir' ].'/xslt/'.md5( $this->get_opt( 'xml' )).".xml";
 	
-	if ( !file_exists( $cacheFileName ) || strtotime( "-".$cache_time ) > filectime( $cacheFileName ))
-	{
+	if ( !file_exists( $cacheFileName ) || strtotime( "-".$cache_time ) > filectime( $cacheFileName )) {
 	        $service = fopen( $this->get_opt( 'xml' ), 'r' );
 	        $cacheFile = fopen( $cacheFileName, 'w' );
-	        while( $output = fread( $service, 8192 ) )
-	        {
+	        while( $output = fread( $service, 8192 ) ) {
 	                fwrite( $cacheFile, $output );
 	        }
 	        fclose( $cacheFile );

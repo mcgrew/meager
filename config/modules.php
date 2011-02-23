@@ -4,16 +4,16 @@
 // The format is $modules->register( 'name', 'path', 'options' );.
 // Path  is relative to the '/modules/' directory.
 
-$modules->register( 'STATUS_301', 'status/301.php' );
-$modules->register( 'STATUS_302', 'status/302.php' );
-$modules->register( 'STATUS_307', 'status/307.php' );
-$modules->register( 'STATUS_400', 'status/400.php' );
-$modules->register( 'STATUS_401', 'status/401.php' );
-$modules->register( 'STATUS_403', 'status/403.php' );
-$modules->register( 'STATUS_404', 'status/404.php' );
-$modules->register( 'STATUS_410', 'status/410.php' );
-$modules->register( 'STATUS_500', 'status/500.php' );
-$modules->register( 'STATUS_501', 'status/501.php' );
+$modules->register( 'STATUS_301', 'STATUS/301.php' );
+$modules->register( 'STATUS_302', 'STATUS/302.php' );
+$modules->register( 'STATUS_307', 'STATUS/307.php' );
+$modules->register( 'STATUS_400', 'STATUS/400.php' );
+$modules->register( 'STATUS_401', 'STATUS/401.php' );
+$modules->register( 'STATUS_403', 'STATUS/403.php' );
+$modules->register( 'STATUS_404', 'STATUS/404.php' );
+$modules->register( 'STATUS_410', 'STATUS/410.php' );
+$modules->register( 'STATUS_500', 'STATUS/500.php' );
+$modules->register( 'STATUS_501', 'STATUS/501.php' );
 
 
 
@@ -38,6 +38,21 @@ $modules->register( 'search', 'search.php', array(
 
 $modules->register( 'analytics', 'analytics.php', array(
 			'tracker' => false 
+));
+
+$modules->register( 'mysqli', 'mysqli.php', array(
+			'host' => ini_get( "mysqli.default_host" ),
+			'username' => ini_get( "mysqli.default_user" ),
+			'password' => ini_get( "mysqli.default_pw" ),
+			'dbname' => "",
+			'port' => ini_get( "mysqli.default_port" ),
+			'socket' => ini_get( "mysqli.default_socket" )
+));
+
+$modules->register( 'ldap', 'ldap.php', array( 
+//			'host' => 'ids.e-enterprise.purdue.edu:389',
+			'host' => 'localhost:51389',
+			'base_dn' => 'cn=users,dc=purdue,dc=edu'
 ));
 
 ?>

@@ -23,9 +23,11 @@ Class Module
 {
 	private $options = array( );
 	private $file;
-	function __construct( $file, $options = array( ))
-	{
+	private $name;
+
+	function __construct( $name, $file, $options = array( )) {
 		$this->file = $file;
+		$this->name = $name;
 		$this->set_opts( $options );
 	}
 
@@ -35,8 +37,7 @@ Class Module
 			Print out the output of a module.
 
 	*/
-	function load( )
-	{
+	function load( ) {
 		global $modules;
 		global $config;
 		$mod = $this;
@@ -52,8 +53,7 @@ Class Module
 			A string containing the output of a module.
 
 	*/
-	function to_string( )
-	{
+	function to_string( ) {
 		ob_start( );
 		$this->load( );
 		$returnvalue = ob_get_contents( );
@@ -73,8 +73,7 @@ Class Module
 			True if the module exists, false otherwise.
 
 	*/
-	function set_opts( $options )
-	{
+	function set_opts( $options ) {
 		$this->options = array_merge( $this->options, $options );
 	}
 
@@ -88,8 +87,7 @@ Class Module
 			value - The value for the option.
 
 	*/
-	function set_opt( $name, $value )
-	{
+	function set_opt( $name, $value ) {
 		$this->set_opts( array( $name => $value ));
 	}
 
@@ -102,8 +100,7 @@ Class Module
 			An associative array containing the options for the module.
 
 	*/
-	function get_opts( )
-	{
+	function get_opts( ) {
 		return $this->options;
 	}
 
@@ -121,25 +118,32 @@ Class Module
 			it is not.
 
 	*/
-	function get_opt( $name, $default=null )
-	{
+	function get_opt( $name, $default=null ) {
 		if ( isset( $this->options[ $name ]) && $this->options[ $name ] !== null )
 			return $this->options[ $name ];
 		return $default;
 	}
 	
 	/*
-
 		Method: get_filename
 			Get the filename registered for a module
 
 		Returns:
 			A string containing the filename for the module.
-
 	*/
-	function get_filename( )
-	{
+	function get_filename( ) {
 		return $this->file;
+	}
+
+	/*
+		Method: get_name
+			Get the name registered for a module
+
+		Returns:
+			A string containing the name for the module.
+	*/
+	function get_name( ) {
+		return $this->name;
 	}
 }
 
@@ -162,9 +166,7 @@ Example:
 Class ModuleHandler
 {
 	private $registry = array( );
-	function __construct( )	
-	{
-	}
+	function __construct( )	{ }
 
 	/*
 		Method: register
@@ -176,10 +178,11 @@ Class ModuleHandler
 			options (optional) - An associative array containing any options which the 
 				module might require.
 	*/
-	function register( $name, $file, $options=array( ))
-	{
-		$this->registry[ $name ] = new Module( $file );
-		$this->set_opts( $name, $options );
+	function register( $name, $file, $options=array( )) {
+		$module = new Module( $name, $file );
+		$module->set_opts( $options );
+		$this->registry[ $name ] = $module;
+		return $module;
 	}
 
 	/*
@@ -194,8 +197,7 @@ Class ModuleHandler
 			True if the module exists, false otherwise.
 
 	*/
-	function exists( $name )
-	{
+	function exists( $name ) {
 		return isset( $this->registry[ $name ]);
 	}
 
@@ -211,8 +213,7 @@ Class ModuleHandler
 			The module object requested.
 
 	*/
-	function get( $name )
-	{
+	function get( $name ) {
 		if ( $this->exists( $name ))
 			return $this->registry[ $name ];
 		return false;
@@ -227,10 +228,8 @@ Class ModuleHandler
 			name - A string containing the name for the module.
 
 	*/
-	function load( $name )
-	{
-		if ( $this->exists( $name ))
-		{
+	function load( $name ) {
+		if ( $this->exists( $name )) {
 			$this->get( $name )->load( );
 			return true;
 		}
@@ -250,10 +249,8 @@ Class ModuleHandler
 			A string containing the output of the module.
 
 	*/
-	function to_string( $name )
-	{
-		if ( $this->exists( $name ))
-		{
+	function to_string( $name ) {
+		if ( $this->exists( $name )) {
 			return $this->get( $name )->to_string( );
 		}
 	}
@@ -271,10 +268,8 @@ Class ModuleHandler
 			True if the module exists, false otherwise.
 
 	*/
-	function set_opts( $name, $options )
-	{
-		if ( $this->exists( $name ))
-		{
+	function set_opts( $name, $options ) {
+		if ( $this->exists( $name )) {
 			$this->get( $name )->set_opts( $options );
 			return true;
 		}
@@ -294,10 +289,8 @@ Class ModuleHandler
 			True if the module exists, false otherwise.
 
 	*/
-	function set_opt( $name, $opt_name, $opt_value )
-	{
-		if ( $this->exists( $name ))
-		{
+	function set_opt( $name, $opt_name, $opt_value ) {
+		if ( $this->exists( $name )) {
 			$this->get( $name )->set_opt( $opt_name, $opt_value );
 			return true;
 		}
@@ -318,10 +311,8 @@ Class ModuleHandler
 			The option value for the module if it exists, false otherwise.
 
 	*/
-	function get_opt( $name, $opt_name, $default=null )
-	{
-		if ( $this->exists( $name ))
-		{
+	function get_opt( $name, $opt_name, $default=null ) {
+		if ( $this->exists( $name )) {
 			return $this->get( $name )->get_opt( $opt_name, $default );
 		}
 		return false;
@@ -339,10 +330,8 @@ Class ModuleHandler
 			An associative array containing the options for the module.
 
 	*/
-	function get_opts( $name )
-	{
-		if ( $this->exists( $name ))
-		{
+	function get_opts( $name ) {
+		if ( $this->exists( $name )) {
 			return $this->get( $name )->get_opts( );
 		}
 		return false;
@@ -360,10 +349,8 @@ Class ModuleHandler
 			A string containing the filename for the module.
 
 	*/
-	function get_filename( $name )
-	{
-		if ( $this->exists( $name ))
-		{
+	function get_filename( $name ) {
+		if ( $this->exists( $name )) {
 			return $this->get( $name )->get_filename( );
 			return false;
 		}
@@ -382,15 +369,12 @@ $modules = new ModuleHandler( );
 		A string containing the filename.
 
 */
-function current_page( )
-{
+function current_page( ) {
 	$current_page = @$_REQUEST[ 'page' ];
-	if ( !file_exists( $current_page ))
-	{
+	if ( !file_exists( $current_page )) {
 		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$current_page.".php" )) $current_page .= '.php';
 		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$current_page.".html" )) $current_page .= '.html';
-	}
-	else if ( is_dir( $_SERVER[ 'DOCUMENT_ROOT' ].$current_page ))
+	} else if ( is_dir( $_SERVER[ 'DOCUMENT_ROOT' ].$current_page ))
 		$current_page = find_index_for_dir( $current_page );
 	return $current_page;
 }
@@ -402,10 +386,8 @@ $current_page = current_page( );
 		Internal function which will return the index file for a directory passed in.
 
 */
-function find_index_for_dir( $dir )
-{
-	foreach ( $config_index_files as $file )
-	{
+function find_index_for_dir( $dir ) {
+	foreach ( $config_index_files as $file ) {
 		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$dir.'/'.$file ) && !is_dir( $_SERVER[ 'DOCUMENT_ROOT' ].$dir.'/'.$file ))
 			return $dir.'/'.$file;
 	}
@@ -421,8 +403,7 @@ function find_index_for_dir( $dir )
 		The directory name for the template to be used.
 
 */
-function get_template( )
-{
+function get_template( ) {
 	global $special_templates;
 	global $config;
 	if ( isset( $_REQUEST[ 'template' ] ) and is_dir( 'templates/'.($template = str_replace( '/', '', $_REQUEST[ 'template' ]))))

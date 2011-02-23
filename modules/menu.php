@@ -1,27 +1,41 @@
 <?php
+/*
 
+Module
+======
+	__Menu__
+		Creates a list for use as a web site menu.
+
+	Options
+	-------
+		id : The id for the menu div.
+		menu : an array containing the menu items.
+
+
+		example menu array:
+		$menu = array(
+			'Home' => '/',
+			'Help' => array(
+				'FAQ' => 'help/faq.php'
+			),
+		);
+
+*/
 #if ( !function_exists( 'create_list' ))
 function create_list( $list ){
 	$returnvalue = "<ul>";
-	foreach( $list as $key => $value )
-	{
+	foreach( $list as $key => $value ) {
 		if ( $key === 0 ) continue;
 		$returnvalue .= "<li>";
-		if ( is_array( $value ))
-		{
-			if ( isset( $value[ 0 ] ) )
-			{
+		if ( is_array( $value )) {
+			if ( isset( $value[ 0 ] ) ) {
 				$returnvalue .= "<a href='".$value[0]."'>$key</a>";
-			}
-			else
-			{
+			} else {
 				$returnvalue .=  "<a href='javascript:void(0)'>$key</a>";
 			}
 			$returnvalue .=  create_list( $value );
 
-		}
-		else
-		{
+		} else {
 			$returnvalue .= "<a href='$value'>$key</a>";
 		}
 		$returnvalue .= "</li>";

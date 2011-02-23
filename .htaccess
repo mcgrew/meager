@@ -3,8 +3,8 @@
 RewriteEngine on
 # If the file is not base.php
 RewriteCond %{REQUEST_URI} !^/base\.php
-# if the file ends with .php or .html
-RewriteCond %{REQUEST_URI} (\.php|\.html)$
+# if the file ends with .php or .html or has no extension
+RewriteCond %{REQUEST_URI} (\.php|\.html|/[^/.]*)$
 RewriteRule ^(.+)$ /base.php?page=$1&%{QUERY_STRING} [L]
 
 

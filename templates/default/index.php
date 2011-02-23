@@ -45,7 +45,10 @@
 				</div><!-- headerModule -->
 
 				<div class="toolbarModule">
-					 <?php $modules->load( 'toolbar' ); ?>
+					 <?php 
+					 if ( $modules->exists( 'toolbar' ))
+						 $modules->load( 'toolbar' ); 
+					 ?>
 				</div><!-- toolbarModule -->
 
 				<?php $modules->load( 'main menu' ) ?>

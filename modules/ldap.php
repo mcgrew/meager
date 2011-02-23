@@ -1,42 +1,35 @@
 <?php
 
-if( isset($_POST['login']) && isset($_POST['password']) )
-{
+if( isset($_REQUEST['login']) && isset($_REQUEST['password']) ) {
     //LDAP stuff here.
-    $username = trim($_POST['login']);
-    $password = trim($_POST['password']);
+    $username = trim($_REQUEST['login']);
+    $password = trim($_REQUEST['password']);
 
-    TabTop("Authenticating...");
-    $ds = ldap_connect(_LDAP_SERVER_);
+    error_log("Authenticating...");
+    $ds = ldap_connect( $this->get_opt( 'host', 'localhost' ));
     
     //Can't connect to LDAP.
-    if( !ds )
-    {
-        echo "Error in contacting the LDAP server -- contact ";
-        echo "technical services!  (Debug 1)";
-        TabBot();
+    if( !$ds ) {
+        error_log( "Error in contacting the LDAP server!");
         exit;
     }
     
     //Connection made -- bind anonymously and get dn for username.
-    $bind = @ldap_bind($ds);
+    $bind = ldap_bind($ds);
     
     //Check to make sure we're bound.
-    if( !bind )
-    {
-        echo "Anonymous bind to LDAP FAILED.  Contact Tech Services! (Debug 2)";
-        TabBot();
+    if( !$bind ) {
+				error_log( "Anonymous bind to LDAP FAILED!" );
         exit;
     }
     
-    $search = ldap_search($ds, "dc=ecolicommunity,dc=org", "uid=$username");
+    $search = ldap_search($ds, $this->get_opt( 'base_dn' ), "uid=$username");
     
-    //Make sure only ONE result was returned -- if not, they might've thrown a * into the username.  Bad user!
-    if( ldap_count_entries($ds,$search) != 1 )
-    {
-        echo "Error processing username -- please try to login again. (Debug 3)";
-        redirect(_WEBROOT_ . "/login.php");
-        TabBot();
+    //Make sure only ONE result was returned
+		// if not, they might've thrown a * into the username.  Bad user!
+    if( ldap_count_entries($ds,$search) != 1 ) {
+        error_log( "Error processing username -- please try to login again." );
+//        redirect( $_SERVER[ 'DOCUMENT_ROOT' ] . "/login.php");
         exit;
     }
     
@@ -44,32 +37,25 @@ if( isset($_POST['login']) && isset($_POST['password']) )
     
     //Now, try to rebind with their full dn and password.
     $bind = @ldap_bind($ds, $info[0][dn], $password);
-    if( !$bind || !isset($bind))
-    {
-        echo "Login failed -- please try again. (Debug 4)";
-        redirect(_WEBROOT_ . "/login.php");
-        TabBot();
+    if( !$bind || !isset($bind)) {
+        echo "Login failed -- please try again.";
+//        redirect( $_SERVER[ 'DOCUMENT_ROOT' ] . "/login.php");
         exit;
     }
     
     //Now verify the previous search using their credentials.
-    $search = ldap_search($ds, "dc=corp,dc=sample,dc=com", "uid=$username");
+    $search = ldap_search($ds, $this->get_opt( 'base_dn' ), "uid=$username");
         
     $info = ldap_get_entries($ds, $search);
-    if( $username == $info[0][uid][0] )
-    {
+    if( $username == $info[0][uid][0] ) {
         echo "Authenticated.";
-        TabBot();
         $_SESSION['username'] = $username;
         $_SESSION['fullname'] = $info[0][cn][0];
-        redirect(_WEBROOT_ . "/index.php");
+//        redirect( $_SERVER[ 'DOCUMENT_ROOT' ] . "/index.php");
         exit;
-    }
-    else
-    {
-        echo "Login failed -- please try again.";
-        redirect(_WEBROOT_ . "/login.php");
-        TabBot();
+    } else {
+        echo "Login problems -- please try again.";
+//        redirect( $_SERVER[ 'DOCUMENT_ROOT' ] . "/login.php");
         exit;
     }
     ldap_close($ds);

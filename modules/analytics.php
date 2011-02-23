@@ -1,7 +1,6 @@
 
 <?php
-if ( $this->get_opt('tracker') )
-{
+if ( $this->get_opt('tracker') ) {
 	printf(  "<script src='%sgoogle-analytics.com/ga.js' type='text/javascript'></script>", isset( $_SERVER[ "HTTPS" ] ) ? "https://ssl." : "http://www." );
 	?>
 
