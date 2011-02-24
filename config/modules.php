@@ -50,9 +50,13 @@ $modules->register( 'mysqli', 'mysqli.php', array(
 ));
 
 $modules->register( 'ldap', 'ldap.php', array( 
-//			'host' => 'ids.e-enterprise.purdue.edu:389',
-			'host' => 'localhost:51389',
-			'base_dn' => 'cn=users,dc=purdue,dc=edu'
+			'host' => 'localhost',
+			'port' => 389,
+			'protocol_version' => 3,
+			'base_dn' => 'dc=example,dc=org',
+			'bind_rdn' => '',
+			'bind_password' => '',
+			'uid_field' => 'uid'
 ));
 
 ?>

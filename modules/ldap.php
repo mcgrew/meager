@@ -5,17 +5,21 @@ if( isset($_REQUEST['login']) && isset($_REQUEST['password']) ) {
     $username = trim($_REQUEST['login']);
     $password = trim($_REQUEST['password']);
 
-    error_log("Authenticating...");
-    $ds = ldap_connect( $this->get_opt( 'host', 'localhost' ));
+    echo("Authenticating...");
+    $ds = ldap_connect( $this->get_opt( 'host', 'localhost' ),
+		                    $this->get_opt( 'port', 389 ));
+		ldap_set_option( $ds, LDAP_OPT_PROTOCOL_VERSION, 3 );
     
     //Can't connect to LDAP.
     if( !$ds ) {
-        error_log( "Error in contacting the LDAP server!");
+        echo ( "Error in contacting the LDAP server!");
         exit;
     }
     
     //Connection made -- bind anonymously and get dn for username.
-    $bind = ldap_bind($ds);
+    $bind = ldap_bind($ds,
+		                  $this->get_opt( 'bind_rdn', null ),
+		                  $this->get_opt( 'bind_password', null ));
     
     //Check to make sure we're bound.
     if( !$bind ) {
@@ -23,12 +27,13 @@ if( isset($_REQUEST['login']) && isset($_REQUEST['password']) ) {
         exit;
     }
     
-    $search = ldap_search($ds, $this->get_opt( 'base_dn' ), "uid=$username");
+    $search = ldap_search($ds, $this->get_opt( 'base_dn' ), 
+		                      $this->get_opt( 'uid_field', 'uid' ) . "=$username");
     
     //Make sure only ONE result was returned
 		// if not, they might've thrown a * into the username.  Bad user!
     if( ldap_count_entries($ds,$search) != 1 ) {
-        error_log( "Error processing username -- please try to login again." );
+        echo( "Error processing username -- please try to login again." );
 //        redirect( $_SERVER[ 'DOCUMENT_ROOT' ] . "/login.php");
         exit;
     }
@@ -38,7 +43,7 @@ if( isset($_REQUEST['login']) && isset($_REQUEST['password']) ) {
     //Now, try to rebind with their full dn and password.
     $bind = @ldap_bind($ds, $info[0][dn], $password);
     if( !$bind || !isset($bind)) {
-        echo "Login failed -- please try again.";
+        echo ( "Login failed -- please try again." );
 //        redirect( $_SERVER[ 'DOCUMENT_ROOT' ] . "/login.php");
         exit;
     }
@@ -48,13 +53,13 @@ if( isset($_REQUEST['login']) && isset($_REQUEST['password']) ) {
         
     $info = ldap_get_entries($ds, $search);
     if( $username == $info[0][uid][0] ) {
-        echo "Authenticated.";
+        echo ( "Authenticated." );
         $_SESSION['username'] = $username;
         $_SESSION['fullname'] = $info[0][cn][0];
 //        redirect( $_SERVER[ 'DOCUMENT_ROOT' ] . "/index.php");
         exit;
     } else {
-        echo "Login problems -- please try again.";
+        echo ( "Login problems -- please try again." );
 //        redirect( $_SERVER[ 'DOCUMENT_ROOT' ] . "/login.php");
         exit;
     }
