@@ -49,14 +49,19 @@ $modules->register( 'mysqli', 'mysqli.php', array(
 			'socket' => ini_get( "mysqli.default_socket" )
 ));
 
-$modules->register( 'ldap', 'ldap.php', array( 
+$modules->register( 'ldap_auth', 'ldap.php', array( 
 			'host' => 'localhost',
 			'port' => 389,
 			'protocol_version' => 3,
-			'base_dn' => 'dc=example,dc=org',
-			'bind_rdn' => '',
-			'bind_password' => '',
+			'base_dn' => null,
+			'bind_rdn' => null,
+			'bind_password' => null,
 			'uid_field' => 'uid'
+));
+
+$modules->register( 'login', 'login.php', array( 
+			'auth_type' => 'ldap_auth',
+			'redirect' => '/index.php'
 ));
 
 ?>

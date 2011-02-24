@@ -41,6 +41,7 @@ Class Module
 		global $modules;
 		global $config;
 		$mod = $this;
+		$params = $this; // Joomla module compatibility.
 		include( $_SERVER[ 'DOCUMENT_ROOT' ].'/modules/'.$this->file );
 	}
 
@@ -122,6 +123,22 @@ Class Module
 		if ( isset( $this->options[ $name ]) && $this->options[ $name ] !== null )
 			return $this->options[ $name ];
 		return $default;
+	}
+
+	/*
+		Method: get
+			Get the value for an option (Joomla module compatibility)
+
+		Arguments:
+			name - A string containing the name of the option.
+			default - A default value to use if the option is not set.
+
+		Returns:
+			The value of the option if it is set, or the value of $default if 
+			it is not.
+	*/
+	function get( $name, $default=null ) {
+		return $this->get_opt( $name, $default );
 	}
 	
 	/*
@@ -233,7 +250,7 @@ Class ModuleHandler
 			$this->get( $name )->load( );
 			return true;
 		}
-		error_log( current_page( ).": The module '$name' is not registered" );
+		error_log( mgrCurrent_page( ).": The module '$name' is not registered" );
 		return false;
 	}
 
@@ -360,33 +377,43 @@ Class ModuleHandler
 
 $modules = new ModuleHandler( );
 
-/*
+/* 
+	Function: mgrConfig
+		Gets a configuration setting from the $config array
+*/
+function mgrConfig( $name, $default=null ) {
+	global $config;
+	if ( isset( $config[ $name ]))
+		return $config[ $name ];
+	return $default;
+}
 
-	Function: current_page
+/*
+	Function: mgrCurrent_page
 		Get the filename of the page to be displayed.
 
 	Returns:
 		A string containing the filename.
 
 */
-function current_page( ) {
-	$current_page = @$_REQUEST[ 'page' ];
-	if ( !file_exists( $current_page )) {
-		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$current_page.".php" )) $current_page .= '.php';
-		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$current_page.".html" )) $current_page .= '.html';
-	} else if ( is_dir( $_SERVER[ 'DOCUMENT_ROOT' ].$current_page ))
-		$current_page = find_index_for_dir( $current_page );
-	return $current_page;
+function mgrCurrent_page( ) {
+	$mgrCurrent_page = @$_REQUEST[ 'page' ];
+	if ( !file_exists( $mgrCurrent_page )) {
+		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$mgrCurrent_page.".php" )) $mgrCurrent_page .= '.php';
+		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$mgrCurrent_page.".html" )) $mgrCurrent_page .= '.html';
+	} else if ( is_dir( $_SERVER[ 'DOCUMENT_ROOT' ].$mgrCurrent_page ))
+		$mgrCurrent_page = mgrFind_index_for_dir( $mgrCurrent_page );
+	return $mgrCurrent_page;
 }
-$current_page = current_page( );
+$mgrCurrent_page = mgrCurrent_page( );
 
 /*
 
-	Function: find_index_for_dif
+	Function: mgrFind_index_for_dir
 		Internal function which will return the index file for a directory passed in.
 
 */
-function find_index_for_dir( $dir ) {
+function mgrFind_index_for_dir( $dir ) {
 	foreach ( $config_index_files as $file ) {
 		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$dir.'/'.$file ) && !is_dir( $_SERVER[ 'DOCUMENT_ROOT' ].$dir.'/'.$file ))
 			return $dir.'/'.$file;
@@ -396,14 +423,14 @@ function find_index_for_dir( $dir ) {
 
 /*
 
-	Function: get_template
+	Function: mgrGet_template
 		Get the template to be used. This can be overridden with the 'template' GET or POST variable
 
 	Returns:
 		The directory name for the template to be used.
 
 */
-function get_template( ) {
+function mgrGet_template( ) {
 	global $special_templates;
 	global $config;
 	if ( isset( $_REQUEST[ 'template' ] ) and is_dir( 'templates/'.($template = str_replace( '/', '', $_REQUEST[ 'template' ]))))
@@ -412,5 +439,52 @@ function get_template( ) {
 		if ( $active )
 			return $template;
 	return $config[ 'template' ];
+}
+
+/*
+	Function: redirect
+		Sends redirect header to the browser, or embeds a javascript redirect if
+		headers have already been sent.
+*/
+function redirect( $location ) {
+	if( $location ) {
+		if ( headers_sent( )) {
+			echo "<script type='text/javascript'>";
+			echo "window.location=\"$location\"";
+			echo "</script>";
+		} else {
+			header( "Status: 307 Temporary Redirect" );
+			header( "Location: http://". $_SERVER[ 'HTTP_HOST' ]. $location );
+		}
+	}
+}
+
+
+
+/*
+	Function: print_array
+		A debug function - prints an array in a human readable format.
+*/
+function print_array($array)
+{
+        echo "<div style=\"font-family: 'Courier New', Courier, monospace; font-size: 12px;\">\n";
+        print_array_recursive($array, '');
+        echo "</div>\n";
+}
+
+function print_array_recursive($array, $prefix)
+{
+        foreach ($array as $k=>$v)
+        {
+                if (is_array($v))
+                {
+                        echo $prefix.$k.' =&gt; '."<br>\n";
+                        print_array_recursive($v, $prefix."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                }
+                else
+                {
+                        echo $prefix.$k.' =&gt; '.$v."<br>\n";
+                }
+        }
 }
 ?>

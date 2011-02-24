@@ -55,6 +55,14 @@
 
 			</div><!-- headerContent -->
 
+			<?php
+			if ( isset( $_SESSION[ 'username' ])) {
+				echo "<div id='user_control'>";
+				echo $_SESSION[ 'username' ];		
+				echo "</div>";
+			}
+			?>
+
 			<div class="clear"></div>
 			<div id="content">
 				<?php
