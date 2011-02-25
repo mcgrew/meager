@@ -1,5 +1,7 @@
 <?php
 
+defined( '_VALID_' ) or die( "Access Denied" );
+
 // This is where modules will be registered. 
 // The format is $modules->register( 'name', 'path', 'options' );.
 // Path  is relative to the '/modules/' directory.

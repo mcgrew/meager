@@ -1,5 +1,7 @@
 <?php
 
+defined( '_VALID_' ) or die( "Access Denied" );
+
 // This array should contain various configurations for your web site.
 $config = array( 
 	'language' => 'en',
