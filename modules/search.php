@@ -1,9 +1,19 @@
 <?php
-/** Searh box module for the header.
- * @author Thomas McGrew
- * @date Sept. 12, 2008
- */
+/*
+	Module
+	=====
+		__Search__
+			Adds a search box which performs a google site search on submission.
 
+		Options
+		-------
+			class : The class name to use for the search box div.
+			containerID : The id to use for the search box div. Defaults to 'searchBox'.
+			focus_action : The action to perform when the box is focused. Should be
+				one of 'select', 'select_if_default', 'clear', 'clear_if_default', or
+				'no_action'. Defaults to 'select'.
+			default_value : The value the box will be filled with when the page loads.
+*/
 
 // no direct access
 defined( '_VALID_' ) or die( 'Access Denied' );
@@ -14,12 +24,12 @@ $FOCUS_ACTION = array(  "select"            => "this.select()",
                         "no_action"         => "" );
 
 $moduleclass_sfx = $this->get_opt( 'moduleclass_sfx', '');
-$containerID     = $this->get_opt( 'containerId', "headerSearchBox" );
-$focusAction     = $FOCUS_ACTION[  $this->get_opt( 'focus_action', 0)  ];
+$containerID     = $this->get_opt( 'containerId', "SearchBox" );
+$focusAction     = $FOCUS_ACTION[  $this->get_opt( 'focus_action', 'select')  ];
 $defaultValue    = $this->get_opt( 'default_value', "" );
 
 echo "
-<div class='search_box module$moduleclass_sfx' id='$containerID'>
+<div class='searchBox $class' id='$containerID'>
 
 <form name='BannerSearchBoxForm' id='search_box_form' method='get' action='http://www.google.com/search' onsubmit='this.q.value = \"site:".$_SERVER['SERVER_NAME']." \"+this.q.value;'>
         <input class='search_box_text' name='q' value='$defaultValue' id='headerSearchInput' onfocus='$focusAction' type='text' style='height:18px;' />

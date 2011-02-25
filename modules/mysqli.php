@@ -1,15 +1,22 @@
 <?php
-
-
-
 /*
+	Module
+	======
+		__Menu__
+			Creates a mysql connection. The connection is stored in a global variable
+			with the name of this modulei($GLOBALS[ $this->name ])
 
-Module
-======
-	__Menu__
-		Creates a mysql connection. The connection is stored in a global variable
-		with the name of this modulei($GLOBALS[ $this->name ])
-
+		Options
+		-------
+			host : The host name of the mysql server. Defaults to the php ini setting.
+			username : The username for the mysql login. Defaults to the php ini 
+				setting.
+			password : The password for the mysql login. Defaults to the php ini
+				setting.
+			dbname : The database name to initially select. Defaults to nothing.
+			port : The port to use for the connection. Defaults to the php ini setting.
+			socket : The mysql socket to use for connection. Defaults to the php ini
+				setting.
 */
 
 defined( '_VALID_' ) or die( 'Access Denied' );

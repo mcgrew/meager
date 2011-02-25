@@ -1,21 +1,16 @@
 <?php
 /*
+	Module
+	=====
+		__XSLT__
+			Transforms an xml file based on an xslt file. This module requires the php
+			xsl module to be installed.
 
-This module requires the php xsl module to be installed. Use as follows:
-
-
-$modules->register( 'xslTest', 'xslt.php', array( 
-	"xml" => "test.xml",
-	"xsl" => "test.xsl",
-	"params" => array(
-		
-	)
-));
-
-$modules->load( 'xslTest' );
-
-xml/xsl path names should be relative to the web root.
-
+	Options
+	-------
+		xml : The XML file to read from. Can be a remote file.
+		xsl : The XSL file to use in the transformation.
+		params : An array of key-value  parameters to be passed to the XSLT.
 */
 if ( !file_exists( $config[ 'cache_dir' ].'/xslt/' ))
 	mkdir( $config[ 'cache_dir' ].'/xslt/', 0777, true );

@@ -1,8 +1,29 @@
 <?php
+/*
+	Module
+	=====
+		__LDAP__
+			Performs authentication with an ldap server based on a provided username
+			and password (as $_POST variables)
 
-if( isset($_REQUEST['username']) && isset($_REQUEST['password']) ) {
-	$username = trim($_REQUEST['username']);
-	$password = trim($_REQUEST['password']);
+		Options
+		-------
+			host : The host name of the ldap server. Defaults to 'localhost'
+			port : The port nubmer for the ldap server. Defaults to 389
+			base_dn : The basedn of the user database (e.g. 'dc=example,dc=org')
+			bind_rdn : The rdn used to bind anonmously to the ldap server
+			bind_password : The password used to bind anonymously to the ldap server
+			uid_field : The ldap field which contains the user id. Normally 'uid' for 
+				openldap, 'samaccountname' for Microsoft Active Directory. Defaults to
+				'uid'
+			success : The page the user should be directed to upon a successful login.
+*/
+
+if( isset($_POST['username']) && 
+	  isset($_POST['password']) && 
+		!isset($_SESSION[ 'username' ]) {
+	$username = trim($_POST['username']);
+	$password = trim($_POST['password']);
 
 	error_log("Authenticating $username...");
 	$ds = ldap_connect( $this->get_opt( 'host', 'localhost' ),

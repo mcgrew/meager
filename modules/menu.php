@@ -1,25 +1,23 @@
 <?php
 /*
+	Module
+	======
+		__Menu__
+			Creates a list for use as a web site menu.
 
-Module
-======
-	__Menu__
-		Creates a list for use as a web site menu.
-
-	Options
-	-------
-		id : The id for the menu div.
-		menu : an array containing the menu items.
+		Options
+		-------
+			id : The id for the menu div.
+			menu : an array containing the menu items.
 
 
-		example menu array:
-		$menu = array(
-			'Home' => '/',
-			'Help' => array(
-				'FAQ' => 'help/faq.php'
-			),
-		);
-
+			example menu array:
+			$menu = array(
+				'Home' => '/',
+				'Help' => array(
+					'FAQ' => 'help/faq.php'
+				),
+			);
 */
 #if ( !function_exists( 'create_list' ))
 function create_list( $list ){
