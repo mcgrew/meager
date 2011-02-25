@@ -4,9 +4,11 @@
 if ( !defined( '_VALID_' )) define( '_VALID_', true );
 session_start( );
 
-include( 'globals.php' );
-include( 'config/configuration.php' );
-include( 'config/modules.php' );
+require_once( 'globals.php' );
+require_once( 'config/configuration.php' );
+require_once( 'config/modules.php' );
+if ( is_readable( 'config/secure.php' ))
+	require_once( 'config/secure.php' );
 
 // Register any modules/options contained in these variables.
 if ( isset( $module_list ))

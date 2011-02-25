@@ -1,4 +1,4 @@
-config/*
+config/secure.php
 index.php
 about.php
 
