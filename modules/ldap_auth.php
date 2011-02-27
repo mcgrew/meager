@@ -68,7 +68,10 @@ if( isset($_POST['username']) &&
 							error_log( "Authenticated $username." );
 							$_SESSION['username'] = $username;
 							$_SESSION['fullname'] = $info[0]['cn'][0];
-							redirect( $this->get_opt( 'success' ));
+							if ( isset( $_REQUEST[ 'redirect' ]))
+								redirect( $_REQUEST[ 'redirect' ]);
+							else
+								redirect( $this->get_opt( 'success', '/' ));
 					}
 					ldap_close($ds);
 				}

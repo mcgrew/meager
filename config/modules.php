@@ -32,8 +32,8 @@ $modules->register( 'main menu', 'menu.php', array(
 ));
 
 $modules->register( 'search', 'search.php', array( 
-			'moduleclass_sfx' => null,
-			'containerId' => null,
+			'container_class' => null,
+			'container_id' => null,
 			'focus_action' => 'clear_if_default',
 			'default_value' => 'Search'
 ));
@@ -51,7 +51,7 @@ $modules->register( 'mysqli', 'mysqli.php', array(
 			'socket' => ini_get( "mysqli.default_socket" )
 ));
 
-$modules->register( 'ldap_auth', 'ldap.php', array( 
+$modules->register( 'ldap_auth', 'ldap_auth.php', array( 
 			'host' => 'localhost',
 			'port' => 389,
 			'protocol_version' => 3,
@@ -59,6 +59,9 @@ $modules->register( 'ldap_auth', 'ldap.php', array(
 			'bind_rdn' => null,
 			'bind_password' => null,
 			'uid_field' => 'uid'
+));
+
+$modules->register( 'null_auth', 'null_auth.php', array(
 ));
 
 $modules->register( 'login', 'login.php', array( 
