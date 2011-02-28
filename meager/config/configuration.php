@@ -10,7 +10,8 @@ $config = array(
 	'title' => 'Default Web Site',
 	'site_owner' => 'Site Owner',
 	'cache_dir' => '/tmp/meager/cache/',
-	'allow_insecure_login' => false
+	'allow_insecure_login' => true,
+	'module_dir' => '/meager/modules/'
 );
 
 if ( !file_exists( $config[ 'cache_dir' ]))
@@ -29,7 +30,7 @@ $config_index_files = array(
 // If none are true, the template $config[ 'template' ] will be used.
 $special_templates = array( 
 	'null' =>  
-		preg_match( '/^info.php$/' , $mgrCurrent_page)
+		preg_match( '/^info.php$/' , $meager_current_page)
 	,
 );
 

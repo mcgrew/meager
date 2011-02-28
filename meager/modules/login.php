@@ -10,7 +10,7 @@
 			auth_type : The type of authentication to use. Should be the name of a 
 				registered authentication module (such as 'ldap_auth', etc.)
 */
-if (!( mgrConfig( 'allow_insecure_login' )  || isset( $_SERVER[ 'HTTPS' ]))) {
+if (!( meager_config( 'allow_insecure_login' )  || isset( $_SERVER[ 'HTTPS' ]))) {
 	die( "<h2>Log in over unencrypted http connection is not permitted.</h2>" );
 }
 
@@ -24,7 +24,7 @@ if ( !isset( $_SESSION[ 'username' ])) {
 	echo "<div id='login_box'>";
 	if ( isset( $_REQUEST['username']))
 		echo "<span id='loginFail'>Login failed - please try again</span>";
-	echo "<form name='loginForm' method='post' action='".mgrCurrent_page( )."'>";
+	echo "<form name='loginForm' method='post' action='".meager_current_page( )."'>";
 	echo "<div id='username_div'>";
 	echo "	<label>Username: ";
 	echo "		<input type='text' name='username' id='username_input' />";

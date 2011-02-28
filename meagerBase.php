@@ -29,7 +29,11 @@ Class Module
 	private $name;
 
 	function __construct( $name, $file, $options = array( )) {
-		$this->file = $file;
+		global $config;
+		if ( substr( $file, 0, 1 ) == "/" )
+			$this->file = $file;
+		else
+			$this->file = $config[ 'doc_root' ].$config[ 'module_dir' ].$file;
 		$this->name = $name;
 		$this->set_opts( $options );
 	}
@@ -45,7 +49,7 @@ Class Module
 		global $config;
 		$mod = $this;
 		$params = $this; // Joomla module compatibility.
-		include( $config[ 'doc_root' ].'/modules/'.$this->file );
+		include( $this->file );
 	}
 
 	/*
@@ -252,7 +256,7 @@ Class ModuleHandler
 			$this->get( $name )->load( );
 			return true;
 		}
-		error_log( mgrCurrent_page( ).": The module '$name' is not registered" );
+		error_log( meager_current_page( ).": The module '$name' is not registered" );
 		return false;
 	}
 
@@ -380,10 +384,10 @@ Class ModuleHandler
 $modules = new ModuleHandler( );
 
 /* 
-	Function: mgrConfig
+	Function: meager_config
 		Gets a configuration setting from the $config array
 */
-function mgrConfig( $name, $default=null ) {
+function meager_config( $name, $default=null ) {
 	global $config;
 	if ( isset( $config[ $name ]))
 		return $config[ $name ];
@@ -391,31 +395,31 @@ function mgrConfig( $name, $default=null ) {
 }
 
 /*
-	Function: mgrCurrent_page
+	Function: meager_current_page
 		Get the filename of the page to be displayed.
 
 	Returns:
 		A string containing the filename.
 
 */
-function mgrCurrent_page( ) {
-	$mgrCurrent_page = @$_REQUEST[ 'page' ];
-	if ( !file_exists( $mgrCurrent_page )) {
-		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$mgrCurrent_page.".php" )) $mgrCurrent_page .= '.php';
-		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$mgrCurrent_page.".html" )) $mgrCurrent_page .= '.html';
-	} else if ( is_dir( $_SERVER[ 'DOCUMENT_ROOT' ].$mgrCurrent_page ))
-		$mgrCurrent_page = mgrFind_index_for_dir( $mgrCurrent_page );
-	return $mgrCurrent_page;
+function meager_current_page( ) {
+	$meager_current_page = @$_REQUEST[ 'page' ];
+	if ( !file_exists( $meager_current_page )) {
+		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$meager_current_page.".php" )) $meager_current_page .= '.php';
+		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$meager_current_page.".html" )) $meager_current_page .= '.html';
+	} else if ( is_dir( $_SERVER[ 'DOCUMENT_ROOT' ].$meager_current_page ))
+		$meager_current_page = meager_find_index_for_dir( $meager_current_page );
+	return $meager_current_page;
 }
-$mgrCurrent_page = mgrCurrent_page( );
+$meager_current_page = meager_current_page( );
 
 /*
 
-	Function: mgrFind_index_for_dir
+	Function: meager_find_index_for_dir
 		Internal function which will return the index file for a directory passed in.
 
 */
-function mgrFind_index_for_dir( $dir ) {
+function meager_find_index_for_dir( $dir ) {
 	foreach ( $config_index_files as $file ) {
 		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$dir.'/'.$file ) && !is_dir( $_SERVER[ 'DOCUMENT_ROOT' ].$dir.'/'.$file ))
 			return $dir.'/'.$file;
@@ -425,18 +429,18 @@ function mgrFind_index_for_dir( $dir ) {
 
 /*
 
-	Function: mgrGet_template
+	Function: meager_get_template
 		Get the template to be used. This can be overridden with the 'template' GET or POST variable
 
 	Returns:
 		The directory name for the template to be used.
 
 */
-function mgrGet_template( ) {
+function meager_get_template( ) {
 	global $special_templates;
 	global $config;
-	if ( isset( $_REQUEST[ 'template' ] ) and is_dir( 'templates/'.($template = str_replace( '/', '', $_REQUEST[ 'template' ]))))
-		return $template;
+	if ( isset( $_REQUEST[ 'template' ] ) and is_dir( 'meager/templates/'.($template = str_replace( '/', '', $_REQUEST[ 'template' ]))))
+		return $_REQUEST[ 'template' ];
 	foreach( $special_templates as $template => $active )
 		if ( $active )
 			return $template;
@@ -492,14 +496,16 @@ function print_array_recursive($array, $prefix)
 
 
 ob_start( );
-require_once( 'config/configuration.php' );
-require_once( 'config/modules.php' );
-if ( is_readable( 'config/secure.php' ))
-	require_once( 'config/secure.php' );
+require_once( 'meager/config/configuration.php' );
 
 // set the root directory for meager.
 $config[ 'http_root' ] = dirname( $_SERVER[ "SCRIPT_NAME" ]);
 $config[ 'doc_root' ] = $_SERVER[ 'DOCUMENT_ROOT' ].$config[ 'http_root' ];
+
+require_once( 'meager/config/modules.php' );
+if ( is_readable( 'meager/config/secure.php' ))
+	require_once( 'meager/config/secure.php' );
+
 
 // Register any modules/options contained in these variables.
 if ( isset( $module_list ))
@@ -510,11 +516,10 @@ if ( isset( $module_options ))
 	foreach( $module_options as $name => $opts )
 			$modules->set_opts( $name, $opts );
 
-$modules->register( 'content',  "../$mgrCurrent_page" );
-if ( !file_exists( $mgrCurrent_page ))
+$modules->register( 'content',  $config[ 'doc_root' ] . $meager_current_page );
+if ( !file_exists( $meager_current_page ))
 	$modules->register( 'content', $modules->get_filename( 'STATUS_404' ));
 
-include ( 'templates/'.mgrGet_template( ).'/index.php' );
+include( 'meager/templates/'.meager_get_template( ).'/index.php' );
 ob_end_flush( );
-
 ?>

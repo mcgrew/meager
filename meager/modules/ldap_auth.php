@@ -21,7 +21,7 @@
 
 if( isset($_POST['username']) && 
 	  isset($_POST['password']) && 
-		!isset($_SESSION[ 'username' ]) {
+		!isset($_SESSION[ 'username' ])) {
 	$username = trim($_POST['username']);
 	$password = trim($_POST['password']);
 

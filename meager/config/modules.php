@@ -51,15 +51,15 @@ $modules->register( 'mysqli', 'mysqli.php', array(
 			'socket' => ini_get( "mysqli.default_socket" )
 ));
 
-$modules->register( 'ldap_auth', 'ldap_auth.php', array( 
-			'host' => 'localhost',
-			'port' => 389,
-			'protocol_version' => 3,
-			'base_dn' => null,
-			'bind_rdn' => null,
-			'bind_password' => null,
-			'uid_field' => 'uid'
-));
+#$modules->register( 'ldap_auth', 'ldap_auth.php', array( 
+#			'host' => 'localhost',
+#			'port' => 389,
+#			'protocol_version' => 3,
+#			'base_dn' => null,
+#			'bind_rdn' => null,
+#			'bind_password' => null,
+#			'uid_field' => 'uid'
+#));
 
 $modules->register( 'null_auth', 'null_auth.php', array(
 ));
