@@ -9,14 +9,16 @@
 		-------
 			auth_type : The type of authentication to use. Should be the name of a 
 				registered authentication module (such as 'ldap_auth', etc.)
+			redirect : The page to redirect to upon successful login.
 */
 if (!( meager_config( 'allow_insecure_login' )  || isset( $_SERVER[ 'HTTPS' ]))) {
 	die( "<h2>Log in over unencrypted http connection is not permitted.</h2>" );
 }
 
 if ( !isset( $_SESSION[ 'username' ])) {
-	if ( !isset( $_REQUEST[ 'login' ])) {
+	if ( isset( $_REQUEST[ 'username' ])) {
 		$authtype = $this->get_opt( 'auth_type' );
+		error_log( "Loading authenticathion module $auth_type" );
 		$modules->load( $authtype );
 	}
 }
@@ -40,4 +42,7 @@ if ( !isset( $_SESSION[ 'username' ])) {
 	echo "</div>";
 }
 
+if ( isset( $_SESSION[ 'username' ])) {
+	redirect( $this->get_opt( 'redirect' ));
+}
 ?>

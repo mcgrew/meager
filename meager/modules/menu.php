@@ -21,10 +21,10 @@
 */
 #if ( !function_exists( 'create_list' ))
 function create_list( $list ){
-	$returnvalue = "<ul>";
+	$returnvalue = "<ul class='menuList'>";
 	foreach( $list as $key => $value ) {
 		if ( $key === 0 ) continue;
-		$returnvalue .= "<li>";
+		$returnvalue .= "<li class='menuItem'>";
 		if ( is_array( $value )) {
 			if ( isset( $value[ 0 ] ) ) {
 				$returnvalue .= "<a href='".$value[0]."'>$key</a>";
@@ -44,6 +44,7 @@ function create_list( $list ){
 
 echo "<div class='menu' id='". $this->get_opt( 'id' ) ."'>";
 echo create_list( $this->get_opt( 'menu' ));
+echo "<div class='clear' style='height:0'></div>";
 echo "</div>";
 
 ?>

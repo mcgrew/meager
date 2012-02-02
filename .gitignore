@@ -1,4 +1,3 @@
 meager/config/secure.php
-index.php
-about.php
-
+./index.php
+./about.php

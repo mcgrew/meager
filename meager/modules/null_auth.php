@@ -12,12 +12,8 @@
 */
 defined( '_VALID_' ) or die( 'Access Denied' );
 
-if( isset($_POST['username'])) {
+if( isset($_REQUEST['username'])) {
 	$_SESSION[ 'username' ] = $_POST[ 'username' ];
-	if ( isset( $_REQUEST[ 'redirect' ]))
-		redirect( $_REQUEST[ 'redirect' ]);
-	else
-		redirect( $this->get_opt( 'success', '/' ));
 }
 
 ?> 

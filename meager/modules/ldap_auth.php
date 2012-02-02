@@ -18,6 +18,7 @@
 				'uid'
 			success : The page the user should be directed to upon a successful login.
 */
+error_log( "Attempting ldap authentication..." );
 
 if( isset($_POST['username']) && 
 	  isset($_POST['password']) && 
@@ -27,7 +28,7 @@ if( isset($_POST['username']) &&
 
 	error_log("Authenticating $username...");
 	$ds = ldap_connect( $this->get_opt( 'host', 'localhost' ),
-											$this->get_opt( 'port', 389 ));
+	                    $this->get_opt( 'port', 389 ));
 	ldap_set_option( $ds, LDAP_OPT_PROTOCOL_VERSION, 3 );
 	
 	//Can't connect to LDAP.
@@ -37,8 +38,8 @@ if( isset($_POST['username']) &&
 		
 		//Connection made -- bind anonymously and get dn for username.
 		$bind = ldap_bind($ds,
-											$this->get_opt( 'bind_rdn', null ),
-											$this->get_opt( 'bind_password', null ));
+		                  $this->get_opt( 'bind_rdn', null ),
+		                  $this->get_opt( 'bind_password', null ));
 		
 		//Check to make sure we're bound.
 		if( !$bind ) {
@@ -47,7 +48,7 @@ if( isset($_POST['username']) &&
 			
 			//look for the user in the ldap database
 			$search = ldap_search($ds, $this->get_opt( 'base_dn' ), 
-														$this->get_opt( 'uid_field', 'uid' ) ."=$username");
+			                      $this->get_opt( 'uid_field', 'uid' ) ."=$username");
 			
 			//Make sure only ONE result was returned
 			// if not, they might've thrown a * into the username.  Bad user!
@@ -61,17 +62,13 @@ if( isset($_POST['username']) &&
 				
 					//Now verify the previous search using their credentials.
 					$search = ldap_search($ds, $this->get_opt( 'base_dn' ),
-																$this->get_opt( 'uid_field', 'uid' ) ."=$username");
-							
+					                      $this->get_opt( 'uid_field', 'uid' ) ."=$username");
+					
 					$info = ldap_get_entries($ds, $search);
 					if( $username == $info[0][ $this->get_opt( 'uid_field', 'uid' )][0] ) {
 							error_log( "Authenticated $username." );
 							$_SESSION['username'] = $username;
 							$_SESSION['fullname'] = $info[0]['cn'][0];
-							if ( isset( $_REQUEST[ 'redirect' ]))
-								redirect( $_REQUEST[ 'redirect' ]);
-							else
-								redirect( $this->get_opt( 'success', '/' ));
 					}
 					ldap_close($ds);
 				}

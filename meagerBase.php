@@ -411,7 +411,6 @@ function meager_current_page( ) {
 		$meager_current_page = meager_find_index_for_dir( $meager_current_page );
 	return $meager_current_page;
 }
-$meager_current_page = meager_current_page( );
 
 /*
 
@@ -420,7 +419,7 @@ $meager_current_page = meager_current_page( );
 
 */
 function meager_find_index_for_dir( $dir ) {
-	foreach ( $config_index_files as $file ) {
+	foreach ( meager_config( 'index_files' ) as $file ) {
 		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$dir.'/'.$file ) && !is_dir( $_SERVER[ 'DOCUMENT_ROOT' ].$dir.'/'.$file ))
 			return $dir.'/'.$file;
 	}
@@ -496,15 +495,18 @@ function print_array_recursive($array, $prefix)
 
 
 ob_start( );
+
 require_once( 'meager/config/configuration.php' );
+$meager_current_page = meager_current_page( );
 
 // set the root directory for meager.
 $config[ 'http_root' ] = dirname( $_SERVER[ "SCRIPT_NAME" ]);
 $config[ 'doc_root' ] = $_SERVER[ 'DOCUMENT_ROOT' ].$config[ 'http_root' ];
 
 require_once( 'meager/config/modules.php' );
-if ( is_readable( 'meager/config/secure.php' ))
-	require_once( 'meager/config/secure.php' );
+foreach ( glob( "meager/include/*.php" ) as $file ) {
+	require_once( $file );
+}
 
 
 // Register any modules/options contained in these variables.
@@ -521,5 +523,14 @@ if ( !file_exists( $meager_current_page ))
 	$modules->register( 'content', $modules->get_filename( 'STATUS_404' ));
 
 include( 'meager/templates/'.meager_get_template( ).'/index.php' );
-ob_end_flush( );
+
+// tidy up the html if the null template isn't being used and $config[ 'tidy' ] is true
+if ( meager_config( 'tidy', false ) && meager_get_template( ) != 'null' ) {
+	$tidy = tidy_parse_string( ob_get_clean( ));
+	$tidy->cleanRepair( );
+	echo tidy_get_output( $tidy );
+} else {
+	ob_end_flush( );
+}
+
 ?>
