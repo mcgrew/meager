@@ -33,7 +33,7 @@ Class Module
 		if ( substr( $file, 0, 1 ) == "/" )
 			$this->file = $file;
 		else
-			$this->file = $config[ 'doc_root' ].$config[ 'module_dir' ].$file;
+			$this->file = meager_config( 'doc_root' ).meager_config( 'module_dir' ).$file;
 		$this->name = $name;
 		$this->set_opts( $options );
 	}
@@ -405,9 +405,9 @@ function meager_config( $name, $default=null ) {
 function meager_current_page( ) {
 	$meager_current_page = @$_REQUEST[ 'page' ];
 	if ( !file_exists( $meager_current_page )) {
-		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$meager_current_page.".php" )) $meager_current_page .= '.php';
-		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$meager_current_page.".html" )) $meager_current_page .= '.html';
-	} else if ( is_dir( $_SERVER[ 'DOCUMENT_ROOT' ].$meager_current_page ))
+		if ( file_exists( meager_config( 'doc_root' ).$meager_current_page.".php" )) $meager_current_page .= '.php';
+		if ( file_exists( meager_config( 'doc_root' ).$meager_current_page.".html" )) $meager_current_page .= '.html';
+	} else if ( is_dir( meager_config( 'doc_root' ).$meager_current_page ))
 		$meager_current_page = meager_find_index_for_dir( $meager_current_page );
 	return $meager_current_page;
 }
@@ -420,7 +420,7 @@ function meager_current_page( ) {
 */
 function meager_find_index_for_dir( $dir ) {
 	foreach ( meager_config( 'index_files' ) as $file ) {
-		if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ].$dir.'/'.$file ) && !is_dir( $_SERVER[ 'DOCUMENT_ROOT' ].$dir.'/'.$file ))
+		if ( file_exists( meager_config( 'doc_root' ).$dir.'/'.$file ) && !is_dir( meager_config( 'doc_root' ).$dir.'/'.$file ))
 			return $dir.'/'.$file;
 	}
 	return false;
@@ -501,7 +501,7 @@ $meager_current_page = meager_current_page( );
 
 // set the root directory for meager.
 $config[ 'http_root' ] = dirname( $_SERVER[ "SCRIPT_NAME" ]);
-$config[ 'doc_root' ] = $_SERVER[ 'DOCUMENT_ROOT' ].$config[ 'http_root' ];
+$config[ 'doc_root' ] = $_SERVER[ 'DOCUMENT_ROOT' ].'/'.$config[ 'http_root' ].'/';
 
 require_once( 'meager/config/modules.php' );
 foreach ( glob( "meager/include/*.php" ) as $file ) {
@@ -518,7 +518,7 @@ if ( isset( $module_options ))
 	foreach( $module_options as $name => $opts )
 			$modules->set_opts( $name, $opts );
 
-$modules->register( 'content',  $config[ 'doc_root' ] . $meager_current_page );
+$modules->register( 'content',  $config[ 'doc_root' ] ."/". $meager_current_page );
 if ( !file_exists( $meager_current_page ))
 	$modules->register( 'content', $modules->get_filename( 'STATUS_404' ));
 

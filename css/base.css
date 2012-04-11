@@ -3,7 +3,7 @@
  */
 
 * {
-	font-family: Arial, 'Nimbus Sans L', Verdana, 'Bitstream Vera Sans', Helvetica, sans-serif !important;
+	font-family: Verdana, Arial, Helvetica, sans-serif !important;
 }
 
 html {
@@ -238,12 +238,13 @@ input[type="button"],
 input[type="submit"],
 button {
 	font-size: 1em;
-	font-weight: bold;
-	background: #d08030;
-	padding: 0 2px;
-	border: 2px #d08030 outset;
+	background-color: #999;
+	padding: 1px 6px;
 	color: #fff;
 	margin: 0;
+	border: 3px #ccc outset;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
 }
 
 input[type="button"]:active,
@@ -302,7 +303,10 @@ button.basic:disabled:active {
  */
 
 /* Some styles for clearing items */
-.clear { clear: both; }
+.clear { 
+	clear: both;
+	display: block; 
+}
 .clearLeft { clear: left; }
 .clearRight { clear: right; }
 

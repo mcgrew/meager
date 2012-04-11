@@ -2,9 +2,9 @@
 /*
 	Module
 	======
-		__Menu__
+		__Mysqli__
 			Creates a mysql connection. The connection is stored in a global variable
-			with the name of this modulei($GLOBALS[ $this->name ])
+			with the name of this module($GLOBALS[ $this->name ])
 
 		Options
 		-------
@@ -32,7 +32,7 @@ if ( !isset( $GLOBALS[ $this->name ])) {
 		$this->get_opt( 'socket', ini_get( "mysqli.default_socket" )));
 
 	if ( mysqli_connect_errno( )) {
-		error_log( "MySQL connection failed: %s<br>", mysqli_connect_error( ));
+		error_log( "MySQL connection failed: %s<br>" . mysqli_connect_error( ));
 	}
 }
 

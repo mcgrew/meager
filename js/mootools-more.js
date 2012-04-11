@@ -1,1 +1,0 @@
-mootools-1.2-more.js
