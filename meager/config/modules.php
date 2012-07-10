@@ -67,6 +67,7 @@ $modules->register( 'null_auth', 'null_auth.php', array(
 $modules->register( 'login', 'login.php', array( 
 			'auth_type' => 'ldap_auth',
 			'redirect' => '/index.php'
+      'login_callback' => function( ) {}
 ));
 
 ?>

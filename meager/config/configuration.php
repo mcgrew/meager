@@ -18,7 +18,7 @@ if ( !file_exists( $config[ 'cache_dir' ]))
 	mkdir( $config[ 'cache_dir' ], 0777, true );
 
 // This array should contain a list of valid index files for a directory.
-$config_index_files = array( 
+$config[ 'index_files' ] = array(
 	"index.php",
 	"index.html"
 );
@@ -30,7 +30,7 @@ $config_index_files = array(
 // If none are true, the template $config[ 'template' ] will be used.
 $special_templates = array( 
 	'null' =>  
-		preg_match( '/^info.php$/' , $meager_current_page)
+    preg_match( '/^services\/.*/' , meager_current_page( ));
 	,
 );
 

@@ -17,9 +17,9 @@ if (!( meager_config( 'allow_insecure_login' )  || isset( $_SERVER[ 'HTTPS' ])))
 
 if ( !isset( $_SESSION[ 'username' ])) {
 	if ( isset( $_REQUEST[ 'username' ])) {
-		$authtype = $this->get_opt( 'auth_type' );
+		$auth_type = $this->get_opt( 'auth_type' );
 		error_log( "Loading authenticathion module $auth_type" );
-		$modules->load( $authtype );
+		$modules->load( $auth_type );
 	}
 }
 if ( !isset( $_SESSION[ 'username' ])) {
@@ -42,7 +42,12 @@ if ( !isset( $_SESSION[ 'username' ])) {
 	echo "</div>";
 }
 
-if ( isset( $_SESSION[ 'username' ])) {
+if ( isset( $_SESSION[ 'username' ]) && isset( $_REQUEST[ 'username' ]) &&
+	   !strcmp( $_SESSION[ 'username' ], $_REQUEST[ 'username' ])) {
+	if ( $this->get_opt( 'login_callback' )) {
+		$callback = $this->get_opt( 'login_callback' );
+		$callback( );
+	}
 	redirect( $this->get_opt( 'redirect' ));
 }
 ?>

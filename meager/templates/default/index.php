@@ -1,10 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $config['language']; ?>" xml:lang="<?php echo $config['language']; ?>">
 <head>
-	<base href="http://<?php echo $_SERVER[ "HTTP_HOST" ].$config[ 'http_root' ]; ?>/" />
-	<script type="text/javascript" 
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
-	</script>
+	<base href="http://<?php echo $config['http_host'].$config[ 'http_root' ]; ?>/" />
 	<title><?php echo str_replace( '../', '',  $modules->get_filename( 'content' ) ).' - '.@$config[ 'title' ]; ?></title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8;" />
 
@@ -79,6 +76,7 @@ if ( $modules->exists( 'head' ))
 			<div class="clear"></div>
 			<div id="content">
 				<?php
+				//include( get_page( ) );
 				$modules->load( 'content' );
 				?>
 				<div class="clear" style="height: 0;"></div>

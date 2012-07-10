@@ -458,8 +458,7 @@ function redirect( $location ) {
 			echo "window.location=\"$location\"";
 			echo "</script>";
 		} else {
-			header( "Status: 307 Temporary Redirect" );
-			header( "Location: http://". $_SERVER[ 'HTTP_HOST' ]. $location );
+			header( "Location: http://". meager_config('http_host') . $location, true, 307 );
 		}
 	}
 }
@@ -493,15 +492,27 @@ function print_array_recursive($array, $prefix)
         }
 }
 
+/**
+ * A function for safely including a file based on user input.
+ * 
+ * @param $file The file name to be sanitized.
+ */
+function meager_safe_include( $file ) {
+	include( "./" . str_replace( '../', '', $file ));
+}
+
 
 ob_start( );
 
 require_once( 'meager/config/configuration.php' );
 $meager_current_page = meager_current_page( );
 
+// figure out the http host name (or set this manually if something fails)
+$config[ 'http_host' ] = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ?
+   $_SERVER['HTTP_X_FORWARDED_HOST'] : $_SERVER['HTTP_HOST'];
 // set the root directory for meager.
 $config[ 'http_root' ] = dirname( $_SERVER[ "SCRIPT_NAME" ]);
-$config[ 'doc_root' ] = $_SERVER[ 'DOCUMENT_ROOT' ].'/'.$config[ 'http_root' ].'/';
+$config[ 'doc_root' ] = $_SERVER[ 'DOCUMENT_ROOT' ].$config[ 'http_root' ].'/';
 
 require_once( 'meager/config/modules.php' );
 foreach ( glob( "meager/include/*.php" ) as $file ) {

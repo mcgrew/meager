@@ -1,6 +1,6 @@
 <?php
 
 session_unset( );
-redirect( "/" );
+redirect( meager_config( 'http_root' ));
 
 ?>

@@ -285,7 +285,7 @@ button.basic:active {
 	border-style: solid;
 }
 
-input[type="button"].basici:disabled,
+input[type="button"].basic:disabled,
 input[type="submit"].basic:disabled,
 button.basic:disabled {
 	color: #bbb;
@@ -295,6 +295,10 @@ input[type="button"].basic:active:disabled,
 input[type="submit"].basic:active:disabled,
 button.basic:disabled:active {
 	background: #ddd;
+}
+
+input[readonly="true"] {
+	background-color: #DDD;
 }
 
 /* =============================================================================
